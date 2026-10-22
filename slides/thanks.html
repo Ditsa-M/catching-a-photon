@@ -1,4 +1,19 @@
 <section id="thanks" data-transition="fade" style="background:#E9ECEB;color:#111418;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column">
+<x-embed style="position:absolute;left:0px;top:0px;width:1920px;height:1080px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=1920,DH=1080;
+const c=document.getElementById("c"),x=c.getContext("2d");
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+const K=["180,83,9","242,165,65","14,116,144","217,119,6"];
+const nd=()=>({x:Math.random()*DW,y:-Math.random()*DH,v:120+Math.random()*260,r:1.4+Math.random()*2.2,k:K[Math.random()<.75?(Math.random()<.5?0:1):(Math.random()<.5?2:3)],a:.35+Math.random()*.5,w:Math.random()*6.28});
+const P=[];for(let i=0;i<170;i++){const p=nd();p.y=Math.random()*DH;P.push(p)}
+let lt=0;
+function L(m){const t=m/1000,dt=Math.min(t-lt,.05);lt=t;x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();
+for(const p of P){p.y+=p.v*dt;p.x+=Math.sin(t*1.5+p.w)*8*dt;if(p.y>DH+10)Object.assign(p,nd());
+const g=x.createLinearGradient(p.x,p.y-p.v*.09,p.x,p.y);g.addColorStop(0,"rgba("+p.k+",0)");g.addColorStop(1,"rgba("+p.k+","+(p.a*.5).toFixed(2)+")");x.strokeStyle=g;x.lineWidth=p.r;x.beginPath();x.moveTo(p.x,p.y-p.v*.09);x.lineTo(p.x,p.y);x.stroke();
+x.beginPath();x.arc(p.x,p.y,p.r,0,6.2832);x.fillStyle="rgba("+p.k+","+p.a.toFixed(2)+")";x.fill()}
+requestAnimationFrame(L)}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
 <div style="position:absolute;left:0;top:150px;width:1920px;height:2px;background:#CCD1CF"></div>
 <div style="position:absolute;left:0;top:760px;width:1920px;height:2px;background:#CCD1CF"></div>
 <div style="position:absolute;left:640px;top:0;width:2px;height:760px;background:#CCD1CF"></div>
@@ -43,5 +58,5 @@ if(t>1.2&&px>-150&&px<DW+150){x.beginPath();for(let u=0;u<=1.001;u+=.02){const X
 }
 onresize=R;R();requestAnimationFrame(L);
 </script></x-embed>
-<aside>Closing slide. Thank the audience and open the floor for questions. The slides stay online at ditsa-m.github.io/catching-a-photon, which you can point people to. The animated wordmark is just a visual sign-off: a photon crosses the word, and each O lights up as it passes. The two reference slides follow this one if anyone asks for sources.</aside>
+<aside>Closing slide. Tiny photons rain down the background. Thank the audience and open the floor for questions. The slides stay online at ditsa-m.github.io/catching-a-photon, which you can point people to. The animated wordmark is just a visual sign-off: a photon crosses the word, and each O lights up as it passes. The two reference slides follow this one if anyone asks for sources.</aside>
 </section>
