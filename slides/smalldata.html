@@ -1,0 +1,58 @@
+<section id="smalldata" data-transition="fade" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#0E7490;font-weight:600">Machine learning · data‑efficient models</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#6B7280">absorb → move → separate → build → search → <span style="color:#0E7490"><b>learn</b></span></p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">Physics‑informed learning from small datasets</h2>
+<x-embed style="position:absolute;left:128px;top:250px;width:900px;height:660px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=900,DH=660;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function C(X,Y,r,k){x.beginPath();x.arc(X,Y,Math.max(r,0),0,6.2832);x.fillStyle=k;x.fill()}
+function Ln(a,b,e,f,k,w){x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.strokeStyle=k;x.lineWidth=w||2;x.stroke()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+const f=u=>.6*Math.exp(-(((u-.72)/.08)**2))+.35*Math.exp(-(((u-.25)/.14)**2))+.08*Math.sin(12*u)+.1;
+const kf=(a,b)=>.12*Math.exp(-((a-b)**2)/.02),m0=.3,NG=120;
+const gx=u=>70+u*790,gy=v=>420-(v+.2)/1.2*360;
+function post(X,Y){const n=X.length,K=[],Lm=[];for(let i=0;i<n;i++){K.push([]);Lm.push(new Array(n).fill(0));for(let j=0;j<n;j++)K[i].push(kf(X[i],X[j])+(i==j?1e-4:0))}
+for(let i=0;i<n;i++)for(let j=0;j<=i;j++){let s=K[i][j];for(let q=0;q<j;q++)s-=Lm[i][q]*Lm[j][q];Lm[i][j]=(i==j)?Math.sqrt(Math.max(s,1e-12)):s/Lm[j][j]}
+const fs=b=>{const z=[];for(let i=0;i<n;i++){let s=b[i];for(let q=0;q<i;q++)s-=Lm[i][q]*z[q];z.push(s/Lm[i][i])}return z};
+const al=(()=>{const z=fs(Y.map(v=>v-m0)),a=new Array(n).fill(0);for(let i=n-1;i>=0;i--){let s=z[i];for(let q=i+1;q<n;q++)s-=Lm[q][i]*a[q];a[i]=s/Lm[i][i]}return a})();
+const M=[],S=[];for(let g=0;g<=NG;g++){const u=g/NG,ks=X.map(v=>kf(u,v));M.push(m0+ks.reduce((s,v,i)=>s+v*al[i],0));const v=fs(ks);S.push(Math.sqrt(Math.max(.12-v.reduce((s,w)=>s+w*w,0),0)))}return [M,S]}
+let X=[.08,.5],Y=[f(.08),f(.5)],lt=0,hold=0,nx=0;
+function D(t){
+if(t-lt>1.3){lt=t;if(X.length>=10){if(++hold>2){X=[.08+Math.random()*.1,.45+Math.random()*.1];Y=X.map(f);hold=0}}else{X.push(nx);Y.push(f(nx))}}
+const [M,S]=post(X,Y);let bi=0,bv=-9;const A=M.map((m,i)=>m+2*S[i]);A.forEach((a,i)=>{if(a>bv){bv=a;bi=i}});nx=bi/NG;
+T("Bayesian optimisation on a 1‑D toy objective",70,32,26,"#1A2233","left",600);T("experiments: "+X.length,860,32,24,"#B45309","right",600);
+Ln(70,420,860,420,"#94A3B8",2);Ln(70,60,70,420,"#94A3B8",2);
+x.beginPath();for(let g=0;g<=NG;g++)x.lineTo(gx(g/NG),gy(M[g]+2*S[g]));for(let g=NG;g>=0;g--)x.lineTo(gx(g/NG),gy(M[g]-2*S[g]));x.closePath();x.fillStyle="rgba(14,116,144,.18)";x.fill();
+x.setLineDash([6,8]);x.beginPath();for(let g=0;g<=NG;g++){const u=g/NG;if(g)x.lineTo(gx(u),gy(f(u)));else x.moveTo(gx(u),gy(f(u)))}x.strokeStyle="rgba(100,116,139,.5)";x.lineWidth=2;x.stroke();x.setLineDash([]);
+x.beginPath();for(let g=0;g<=NG;g++){if(g)x.lineTo(gx(g/NG),gy(M[g]));else x.moveTo(gx(0),gy(M[0]))}x.strokeStyle="#0E7490";x.lineWidth=3.5;x.stroke();
+X.forEach((u,i)=>{C(gx(u),gy(Y[i]),9,"#B45309")});
+x.setLineDash([4,6]);Ln(gx(nx),70,gx(nx),600,"rgba(229,96,77,.8)",2);x.setLineDash([]);
+T("μ(x) ± 2σ(x)",80,92,24,"#0E7490","left",600);T("hidden truth",80,122,24,"#4A5568");T("experiments",80,152,24,"#B45309");
+const amx=Math.max(...A),amn=Math.min(...A);x.beginPath();for(let g=0;g<=NG;g++){const v=(A[g]-amn)/(amx-amn+1e-9);if(g)x.lineTo(gx(g/NG),590-v*110);else x.moveTo(gx(0),590-v*110)}x.strokeStyle="#C0392B";x.lineWidth=3;x.stroke();
+Ln(70,590,860,590,"#94A3B8",2);T("acquisition: UCB = μ + 2σ",80,470,24,"#C0392B","left",600);
+T("x_next = argmax (μ + 2σ)",70,640,26,"#1A2233","left",600);T("candidate composition x →",860,640,24,"#6B7280","right");
+}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<div data-build-in="rise 1" style="position:absolute;left:1080px;top:250px;width:672px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:28px;font-weight:600;color:#0E7490">COF‑343 by ML (Nat. Synth. 2026)</h3>
+<p style="font-size:24px;line-height:1.35;color:#2D3748">Augmentation + ensembles + physics descriptors cut RMSE 4.70 → 3.31; COF‑343: 12,979 µmol h⁻¹ g⁻¹ H₂O₂</p>
+</div>
+<div data-build-in="rise 2" style="position:absolute;left:1080px;top:420px;width:672px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:28px;font-weight:600;color:#B45309">LLM‑guided COF (Nat. Commun. 2026)</h3>
+<p style="font-size:24px;line-height:1.35;color:#2D3748">355 papers → 11,000+ relations → thiazole COF: 82.3 mM H₂O₂, no sacrificial agent, 1.39% SCC</p>
+</div>
+<div data-build-in="rise 3" style="position:absolute;left:1080px;top:590px;width:672px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:28px;font-weight:600;color:#C0392B">Active learning (Adv. Funct. Mater. 2025)</h3>
+<p style="font-size:24px;line-height:1.35;color:#2D3748">8‑metal nanocatalysts: state‑of‑the‑art HER, but the OER model predicted poorly. Report failures.</p>
+</div>
+<div data-build-in="rise 4" style="position:absolute;left:1080px;top:760px;width:672px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:28px;font-weight:600;color:#4A5568">Tiny data (npj Comput. Mater. 2024)</h3>
+<p style="font-size:24px;line-height:1.35;color:#2D3748">Sparse SISSO‑type models screen 6‑component ZnTe alloys from a small database</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#6B7280">Nat. Synth. doi:10.1038/s44160-026-01037-0 · Nat. Commun. doi:10.1038/s41467-026-69549-z · Perumal et al. 2025 · Oh, Yoo &amp; Jang 2024 · BO curve is a toy</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#6B7280;text-align:right">15</p>
+<aside>Here is the plot twist: photocatalysis rarely has big, clean datasets. Nobody has a million measured photocatalysts. So how do these models learn at all? The animation is the core algorithm behind the robot chemist and the active-learning paper: Bayesian optimisation. A Gaussian process gives a mean prediction and an uncertainty band from only a few experiments. The acquisition function, here the upper confidence bound μ + 2σ, picks the next experiment where the model is either promising or unsure. Watch it find the tall peak in about six to eight experiments instead of a full grid scan. The four papers show the range. Nature Synthesis 2026 trained on a small COF literature dataset; data augmentation, ensembles and fusing structural fragments with physics-based descriptors lowered the validation RMSE from 4.70 to 3.31 and led to COF-343, at about 12,979 micromoles per hour per gram of H2O2. Nature Communications 2026 used a language model to read 355 COF photocatalysis papers, extract more than 11,000 chemical relationships and recommend a thiazole linkage; the resulting COF made 82.3 mM H2O2 without a sacrificial agent at 1.39 percent solar-to-chemical efficiency. Advanced Functional Materials 2025 used active learning over eight-metal nanoparticles: excellent for hydrogen evolution, but the oxygen-evolution model predicted poorly, an honest failure worth showing. And npj 2024 shows sparse, interpretable models working on very small databases.</aside>
+</section>

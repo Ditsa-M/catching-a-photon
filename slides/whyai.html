@@ -1,0 +1,44 @@
+<section id="whyai" data-transition="fade" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#0E7490;font-weight:600">Machine learning · screening</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#6B7280">absorb → move → separate → build → <span style="color:#0E7490"><b>search</b></span> → learn</p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">The search space outgrows quantum chemistry</h2>
+<x-embed style="position:absolute;left:128px;top:250px;width:900px;height:660px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=900,DH=660;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function C(X,Y,r,k){x.beginPath();x.arc(X,Y,Math.max(r,0),0,6.2832);x.fillStyle=k;x.fill()}
+function Ln(a,b,e,f,k,w){x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.strokeStyle=k;x.lineWidth=w||2;x.stroke()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+const lv=[[40,600,"10⁴–10⁵ candidates","#4A5568"],[160,420,"ML prescreen: hours","#0E7490"],[280,260,"hybrid DFT on ~10²","#2563EB"],[390,130,"synthesis ~10","#B45309"],[470,60,"validated: 1–3","#C0392B"]],cx=330,sv=[.45,.4,.45,.5];
+const wAt=y=>{for(let i=0;i<4;i++){const a=lv[i],b=lv[i+1];if(y<=b[0]){const f=(y-a[0])/(b[0]-a[0]);return a[1]+(b[1]-a[1])*Math.max(f,0)}}return 60};
+let P=[],acc=0,lt=0;
+function D(t){const dt=Math.min(t-lt,.1);lt=t;acc+=dt*28;while(acc>1){acc--;let d=0;while(d<4&&Math.random()<sv[d])d++;P.push({u:Math.random()*2-1,t0:t,d})}
+for(let i=0;i<4;i++){const a=lv[i],b=lv[i+1];x.beginPath();x.moveTo(cx-a[1]/2,a[0]);x.lineTo(cx+a[1]/2,a[0]);x.lineTo(cx+b[1]/2,b[0]);x.lineTo(cx-b[1]/2,b[0]);x.closePath();x.fillStyle="rgba(14,116,144,"+(.05+i*.04).toFixed(2)+")";x.fill()}
+lv.forEach(([y,w,s,k])=>{Ln(cx-w/2,y,cx+w/2,y,k,2);T(s,650,y+8,24,k,"left",600)});
+P=P.filter(p=>t-p.t0<4.5);
+for(const p of P){const y=40+(t-p.t0)*120,dl=p.d<4?lv[p.d+1][0]:520;let X,Y=y,a=1,k=lv[Math.min(p.d,4)][3];
+if(y<dl){X=cx+p.u*wAt(y)/2*.9;let lvl=0;for(let i=1;i<5;i++)if(y>lv[i][0])lvl=i;k=lv[lvl][3]}else{const f=(y-dl)/60;if(f>1)continue;X=cx+p.u*wAt(dl)/2*.9+(p.u<0?-1:1)*f*60;Y=dl;a=1-f;if(p.d<4)k="#94A3B8"}
+x.globalAlpha=a;C(X,Y,5,k);x.globalAlpha=1}
+const g=Math.min((t%8)/2,1);
+T("hybrid DFT, >20,000 MOFs",20,572,24,"#2D3748");x.fillStyle="#B45309";x.fillRect(340,554,520*g,24);if(g>.95)T("≈ 1 month",850,573,24,"#FFFFFF","right",600);
+T("graph‑transformer model",20,622,24,"#2D3748");x.fillStyle="#0E7490";x.fillRect(340,604,Math.max(520*4.5/720*g,4),24);T("≈ 4.5 h",360,623,24,"#0E7490","left",600);
+}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<div data-build-in="rise 1" style="position:absolute;left:1080px;top:250px;width:656px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#0E7490">Prescreening MOFs (Anselmi 2026)</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Graph transformers trained on hybrid DFT screened &gt;20,000 MOFs for CO₂ photoreduction in ~4.5 h vs ~1 month; error‑aware picks recovered 70% (vs 20%) of DFT hits.</p>
+</div>
+<div data-build-in="rise 2" style="position:absolute;left:1080px;top:524px;width:664px;background:#FBF7EF;border-left:6px solid #0E7490;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:2px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">speed‑up ≈ 720 h / 4.5 h ≈ 160×</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#0E7490">cost ≈ N·t_ML + f·N·t_DFT, f ≪ 1</p>
+</div>
+<div data-build-in="rise 3" style="position:absolute;left:1080px;top:668px;width:656px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#B45309">Scale needs validation</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">GNoME: 381k predicted stable crystals. A‑Lab: 41/58 targets in 17 days, later disputed on phase ID (Leeman 2024).</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#6B7280">Anselmi et al., J. Mater. Chem. A 2026 · Merchant et al. 2023 · Szymanski et al. 2023 · Leeman et al., PRX Energy 2024 · funnel counts schematic</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#6B7280;text-align:right">12</p>
+<aside>Remember the cost of simulating one protein on slide 9? Now multiply by every candidate material. The candidate space has outgrown quantum chemistry. The funnel animation shows the workflow most of these papers share: tens of thousands of hypothetical structures, a fast ML prescreen, hybrid DFT on the survivors, then a handful synthesised and one to three validated. The cleanest number comes from Anselmi and colleagues (J. Mater. Chem. A, 2026). Screening more than 20,000 MOFs for CO2 photoreduction with hybrid DFT took about a month to find 105 candidates; their molecular graph transformer did the prescreen in about 4.5 hours, roughly 160 times faster. And because they account for the model’s own error when choosing what to pass on, the fraction of true DFT hits recovered went from 20 to 70 percent. The cost equation says ML pays off when it lets you send only a small fraction f of candidates to DFT. The caution: scale is not discovery. GNoME predicted about 381,000 new stable crystals, and the A-Lab robot reported 41 of 58 targets in 17 days, but Leeman and colleagues re-examined the X-ray data and disputed many of the phase assignments. Validation is the whole game, which is the thread through the next four slides.</aside>
+</section>

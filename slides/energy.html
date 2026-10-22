@@ -1,0 +1,53 @@
+<section id="energy" data-transition="fade" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#B45309;font-weight:600">Energetics</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#6B7280"><span style="color:#B45309"><b>absorb</b></span> → move → separate → build → search → learn</p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">Sunlight is abundant, but each photon is weak</h2>
+<div data-build-in="rise 1" style="position:absolute;left:128px;top:260px;width:704px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:row;gap:48px">
+<div style="display:flex;flex-direction:column;gap:4px"><p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:64px;font-weight:700;line-height:1.1;color:#B45309">1.2 × 10⁵ TW</p><p style="font-size:26px;color:#4A5568">sunlight striking Earth</p></div>
+<div style="display:flex;flex-direction:column;gap:4px"><p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:64px;font-weight:700;line-height:1.1;color:#0E7490">13.5 TW</p><p style="font-size:26px;color:#4A5568">human use, 2001</p></div>
+</div>
+<div data-build-in="rise 2" style="position:absolute;left:128px;top:458px;width:712px;background:#FBF7EF;border-left:6px solid #B45309;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:2px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">E = hc/λ = 1239.8 eV·nm / λ</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">680 nm → 1.82 eV = 176 kJ mol⁻¹</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">C–H ≈ 4.3 eV, O–H ≈ 4.8 eV &gt; 1 photon</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">8 photons ≈ 14.4 eV → O₂ + 2 NADPH</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#B45309">stored: 4 e⁻ × 1.14 V ≈ 4.6 eV ≈ 32 %</p>
+</div>
+<p data-build-in="fade 3" style="position:absolute;left:128px;top:738px;width:760px;font-size:28px;line-height:1.4;color:#2D3748">So photosynthesis stores energy <b>one electron at a time</b>, and every step has to outrun decay of the excited state.</p>
+<x-embed style="position:absolute;left:960px;top:250px;width:832px;height:640px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=832,DH=640;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function C(X,Y,r,k){x.beginPath();x.arc(X,Y,Math.max(r,0),0,6.2832);x.fillStyle=k;x.fill()}
+function Ln(a,b,e,f,k,w){x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.strokeStyle=k;x.lineWidth=w||2;x.stroke()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+const X0=80,X1=800,Y0=500,Y1=40;
+const px=l=>X0+(l-300)/700*(X1-X0),py=e=>Y0-e/4.4*(Y0-Y1);
+function col(l){let r=0,g=0,b=0;if(l<380){r=.45;b=.6}else if(l<440){r=(440-l)/60;b=1}else if(l<490){g=(l-440)/50;b=1}else if(l<510){g=1;b=(510-l)/20}else if(l<580){r=(l-510)/70;g=1}else if(l<645){r=1;g=(645-l)/65}else if(l<750){r=1}else{r=.55;g=.12;b=.12}return "rgb("+(r*255|0)+","+(g*255|0)+","+(b*255|0)+")"}
+function D(t){
+for(let l=300;l<1000;l+=5){x.globalAlpha=(l<380||l>750)?.4:.95;x.fillStyle=col(l);x.fillRect(px(l),Y0+16,px(l+5)-px(l)+.5,24)}x.globalAlpha=1;
+Ln(X0,Y0,X1,Y0,"#94A3B8",2);Ln(X0,Y0,X0,Y1,"#94A3B8",2);
+for(let e=1;e<=4;e++)T(e+"",X0-12,py(e)+9,24,"#4A5568","right");
+T("eV",X0-12,Y1+8,24,"#4A5568","right");
+for(const l of [300,500,700,900])T(l+"",px(l),Y0+74,24,"#4A5568","center");
+T("λ / nm",X1,Y0+74,24,"#4A5568","right");
+x.beginPath();for(let l=300;l<=1000;l+=5){const X=px(l),Y=py(1239.8/l);if(l>300)x.lineTo(X,Y);else x.moveTo(X,Y)}x.strokeStyle="#1A2233";x.lineWidth=3;x.stroke();
+x.setLineDash([8,8]);Ln(X0,py(1.23),X1,py(1.23),"#0E7490",2);x.setLineDash([]);
+T("1.23 eV per e⁻ (water splitting)",X0+12,py(1.23)-12,24,"#0E7490");
+const mk=[[430,"Soret",0],[680,"P680",160],[700,"P700",200]];
+for(const [l,s,h] of mk){const X=px(l),Y=py(1239.8/l);if(h){x.setLineDash([3,5]);Ln(X,Y,X,h+8,"rgba(242,165,65,.6)",1.5);x.setLineDash([]);T(s,X+6,h,24,"#B45309")}else T(s,X+12,Y-12,24,"#B45309");C(X,Y,7,"#B45309")}
+const l=300+(Math.sin(t*.45)*.5+.5)*700,e=1239.8/l,X=px(l),Y=py(e);
+x.setLineDash([4,6]);Ln(X,Y0,X,Y,"rgba(26,34,51,.55)",2);x.setLineDash([]);
+C(X,Y,16,"rgba(26,34,51,.2)");C(X,Y,10,col(l));
+x.fillStyle="rgba(255,255,255,.92)";x.fillRect(410,392,390,100);x.strokeStyle="#DDE3EC";x.lineWidth=1;x.strokeRect(410,392,390,100);
+T("λ = "+l.toFixed(0)+" nm   E = "+e.toFixed(2)+" eV",426,426,24,"#1A2233");
+T("= "+(e*96.485).toFixed(0)+" kJ/mol per photon",426,456,24,"#4A5568");
+T("photons per O₂ ≥ "+Math.max(4,Math.ceil(4.92/e)),426,486,24,"#B45309",400);
+}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#6B7280">Lewis &amp; Nocera, PNAS 2006 · E°′(O₂/H₂O) = +0.82 V, E°′(NADP⁺/NADPH) = −0.32 V at pH 7</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#6B7280;text-align:right">2</p>
+<aside>The hook: Lewis and Nocera’s point that the Sun delivers about 1.2 × 10^5 TW to Earth, against roughly 13.5 TW of human use in 2001. Plenty of supply, so the problem is conversion and storage. Do the photon math with the animation: E = hc/λ, 1239.8 divided by the wavelength in nm gives eV. A 680 nm photon is 1.82 eV, or 176 kJ/mol. Water oxidation needs 1.23 eV per electron thermodynamically (the dashed line), and four electrons per O2, so you can never do it with one photon; the readout shows the minimum photon count at each wavelength. Real photosynthesis uses 8 photons (two photosystems in series) to move 4 electrons from water (+0.82 V) to NADP+ (−0.32 V), a 1.14 V span, so it stores about 4.6 eV out of 14.4 eV absorbed, around 32 percent. The rest buys speed and irreversibility. Key message: every one of those steps must happen before the excited state decays. So how long do we actually have? That is the clock on the next slide.</aside>
+</section>

@@ -1,0 +1,35 @@
+<section id="growth" data-transition="fade" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#B45309;font-weight:600">Field overview</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#6B7280">absorb → move → separate → <span style="color:#B45309"><b>build</b></span> → search → learn</p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">Growth of machine learning in photocatalysis</h2>
+<x-embed style="position:absolute;left:128px;top:250px;width:800px;height:640px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=800,DH=640;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function Ln(a,b,e,f,k,w){x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.strokeStyle=k;x.lineWidth=w||2;x.stroke()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+const Y=[2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025],V=[10,9,13,14,11,12,18,35,48,58,92,134,189,361];
+const X0=90,X1=780,B0=540,B1=100,bw=(X1-X0)/14,hy=v=>B0-v/400*(B0-B1);
+function D(t){const s=t%11,g=Math.min(s/3,1);
+T("ML × photocatalysis papers per year",X0,40,26,"#1A2233","left",600);
+for(const v of [100,200,300,400]){x.setLineDash([4,8]);Ln(X0,hy(v),X1,hy(v),"rgba(100,116,139,.22)",1);x.setLineDash([]);T(v+"",X0-12,hy(v)+8,24,"#4A5568","right")}
+Ln(X0,B0,X1,B0,"#94A3B8",2);
+V.forEach((v,i)=>{let e=Math.min(Math.max(g*14-i*.6,0),1);e=e*e*(3-2*e);const h=(B0-hy(v))*e,X=X0+i*bw+6,gr=x.createLinearGradient(0,B0-h,0,B0);gr.addColorStop(0,i>10?"#B45309":"#0E7490");gr.addColorStop(1,"rgba(14,116,144,.2)");x.fillStyle=gr;x.fillRect(X,B0-h,bw-12,h);if(i>10&&e>=1)T(v+"",X+(bw-12)/2,B0-h-10,24,"#1A2233","center");if(i%3==0||i==13)T(Y[i]+"",X+(bw-12)/2,B0+36,24,"#4A5568","center")});
+if(s>3.4){const a=Math.min((s-3.4)/1,1);x.globalAlpha=a;x.beginPath();for(let yr=2019;yr<=2025.001;yr+=.1){const v=35*Math.exp(.389*(yr-2019)),X=X0+(yr-2012)*bw+bw/2,yy=hy(v);if(yr>2019)x.lineTo(X,yy);else x.moveTo(X,yy)}x.setLineDash([10,8]);x.strokeStyle="#1A2233";x.lineWidth=3;x.stroke();x.setLineDash([]);
+T("N ∝ e^(0.39·year): doubling ≈ 1.8 yr",X0+16,150,26,"#B45309","left",600);T("×26 from 2015 to 2025",X0+16,188,26,"#1A2233");x.globalAlpha=1}
+T("OpenAlex, title/abstract search; retrieved 18 Oct 2026",X0,625,24,"#6B7280");
+}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<p data-build-in="fade 1 auto" style="position:absolute;left:980px;top:250px;width:812px;font-size:24px;line-height:1.3;color:#2D3748"><span style="color:#B45309"><b>1972</b></span> · TiO₂ splits water with light (Fujishima &amp; Honda): the first artificial “leaf”</p>
+<p data-build-in="fade 2 auto" style="position:absolute;left:980px;top:338px;width:812px;font-size:24px;line-height:1.3;color:#2D3748"><span style="color:#B45309"><b>2001</b></span> · Photosystem I at 2.5 Å reveals nature’s blueprint (Jordan et al.)</p>
+<p data-build-in="fade 3 auto" style="position:absolute;left:980px;top:426px;width:812px;font-size:24px;line-height:1.3;color:#2D3748"><span style="color:#0E7490"><b>2007</b></span> · Neural networks learn quantum energies (Behler &amp; Parrinello)</p>
+<p data-build-in="fade 4 auto" style="position:absolute;left:980px;top:514px;width:812px;font-size:24px;line-height:1.3;color:#2D3748"><span style="color:#0E7490"><b>2020</b></span> · A robot runs its own photocatalyst search (Burger) · SrTiO₃:Al reaches EQE ≈ 96% in UV (Takata)</p>
+<p data-build-in="fade 5 auto" style="position:absolute;left:980px;top:602px;width:812px;font-size:24px;line-height:1.3;color:#2D3748"><span style="color:#B45309"><b>2021</b></span> · 100 m² of photocatalyst panels make H₂, at 0.76% (Nishiyama)</p>
+<p data-build-in="fade 6 auto" style="position:absolute;left:980px;top:690px;width:812px;font-size:24px;line-height:1.3;color:#2D3748"><span style="color:#0E7490"><b>2023</b></span> · 9.2% solar‑to‑H₂ (Zhou) · AI goes big: GNoME, A‑Lab, Coscientist</p>
+<p data-build-in="fade 7 auto" style="position:absolute;left:980px;top:778px;width:812px;font-size:24px;line-height:1.3;color:#1A2233"><span style="color:#B45309"><b>2025–26</b></span> · AI designs photocatalysts that work in the lab</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#6B7280">Chart: OpenAlex works, (“machine learning” | “deep learning” | “neural network”) AND photocataly*, title/abstract · full references at end</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#6B7280;text-align:right">11</p>
+<aside>We have the checklist, and we have a gap of one to two orders of magnitude. How has the field tried to close it? The timeline on the right tells the story in two colours: amber for photochemistry, teal for AI. It starts in 1972, when Fujishima and Honda split water on TiO2 with light. In 2001 the Photosystem I structure gave us nature’s blueprint. In 2007 Behler and Parrinello showed that neural networks can learn quantum-mechanical energies. By 2020 the two threads meet: a mobile robot ran its own photocatalyst search, and SrTiO3:Al reached near-unity quantum efficiency, but only in the UV. 2021 brought 100 m² of panels making hydrogen, at only 0.76 percent. 2023 brought a 9.2 percent lab record and the big AI materials projects. The chart on the left is real data from OpenAlex: papers combining machine learning with photocatalysis went from 14 in 2015 to 361 in 2025, about 26-fold, doubling every 1.8 years. Why did chemists turn to AI so fast? Because of the size of the search problem.</aside>
+</section>

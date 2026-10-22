@@ -1,0 +1,28 @@
+<section id="checklist" data-transition="push" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#B45309;font-weight:600">Artificial photosynthesis</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#6B7280">absorb → move → separate → <span style="color:#B45309"><b>build</b></span> → search → learn</p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">Design principles and the efficiency gap</h2>
+<table data-build-in="fade 1" style="position:absolute;left:128px;top:250px;width:1664px;font-size:24px;color:#2D3748;font-family:'IBM Plex Sans', Arial, sans-serif">
+<tr style="background:#F4F6FA"><th style="width:14%;color:#B45309">Step</th><th style="width:40%;color:#2F7D4F">Photosystem I</th><th style="width:46%;color:#0E7490">Artificial photocatalyst</th></tr>
+<tr><td><b>Absorb</b></td><td>~100‑Chl antenna: ~100× the photon supply</td><td>band gap ≥ 1.23 eV + overpotentials, so ≈ 1.8–2.4 eV in practice</td></tr>
+<tr><td><b>Transfer</b></td><td>sub‑ps exciton hops; trapping yield ≈ 0.99</td><td>excitons or carriers must reach the surface before recombining</td></tr>
+<tr><td><b>Separate</b></td><td>P700⁺A₀⁻ in ps; Marcus‑tuned electron chain</td><td>heterojunctions, donor–acceptor frameworks, cocatalysts</td></tr>
+<tr><td><b>Catalyse</b></td><td>Fd/FNR → NADPH; PSII’s Mn₄CaO₅ cluster for water</td><td>H₂, O₂, H₂O₂ or CO₂‑reduction cocatalysts that survive photocorrosion</td></tr>
+</table>
+<x-embed style="position:absolute;left:128px;top:704px;width:1664px;height:210px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=1664,DH=210;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+const rows=[["Crops, solar → biomass (typical)",1,"Blankenship 2011","#2F7D4F"],["C₄ plants, theoretical maximum",6,"Blankenship 2011","#2F7D4F"],["100 m² SrTiO₃:Al panels, solar → H₂",.76,"Nishiyama 2021","#0E7490"],["InGaN/GaN, solar → H₂ (concentrated)",9.2,"Zhou 2023","#0E7490"],["Single‑junction PV limit",33,"Shockley–Queisser 1961","#B45309"]];
+function D(t){const s=t%9,g=Math.min(s/2.5,1);
+T("efficiency, %",600,22,24,"#6B7280");
+rows.forEach((r,i)=>{const y=40+i*36;T(r[0],0,y+20,24,"#2D3748");let e=Math.min(Math.max(g*1.6-i*.15,0),1);e=e*e*(3-2*e);const w=Math.max(r[1]/35*760*e,3);x.fillStyle=r[3];x.fillRect(600,y+2,w,24);if(e>.98)T(r[1]+"%",612+w,y+21,24,"#1A2233","left",600);T(r[2],1664,y+20,24,"#6B7280","right")});
+}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#6B7280">Metrics differ (biomass vs H₂ vs electricity): compare orders of magnitude, not decimals · Jordan 2001 · Takata 2020</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#6B7280;text-align:right">10</p>
+<aside>Everything in the photosynthesis section reduces to four steps, and an artificial photocatalyst has to do the same four. Absorb: PSI shares one reaction centre among about a hundred chlorophylls; a photocatalyst needs a band gap above 1.23 eV plus overpotentials, so realistically about 1.8 to 2.4 eV. Transfer: PSI moves excitons in sub-picosecond hops with about 99 percent trapping yield; in a semiconductor or framework, the excitons or carriers must reach a surface before they recombine. Separate: PSI forms P700+A0− in picoseconds with a Marcus-tuned chain; artificial systems use heterojunctions, donor-acceptor frameworks and cocatalysts. Catalyse: biology has ferredoxin and FNR, plus PSII’s Mn4CaO5 cluster on the water side; artificial systems need cocatalysts for H2, O2, H2O2 or CO2 reduction that survive photocorrosion. The bar chart is a reality check on efficiencies. Crops convert around 1 percent of sunlight to biomass, the best scaled photocatalyst panels about 0.76 percent solar-to-hydrogen, a lab InGaN record 9.2 percent, and single-junction photovoltaics are capped near 33 percent. The metrics differ, so compare orders of magnitude. That is the gap: we know the rules, but our materials are one to two orders of magnitude short of where they could be. How is the field trying to close it?</aside>
+</section>

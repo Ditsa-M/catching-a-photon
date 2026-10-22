@@ -1,0 +1,51 @@
+<section id="marcus" data-transition="fade" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#B45309;font-weight:600">Charge separation</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#6B7280">absorb → move → <span style="color:#B45309"><b>separate</b></span> → build → search → learn</p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">Charge separation and Marcus theory</h2>
+<x-embed style="position:absolute;left:128px;top:250px;width:860px;height:660px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=860,DH=660;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function C(X,Y,r,k){x.beginPath();x.arc(X,Y,Math.max(r,0),0,6.2832);x.fillStyle=k;x.fill()}
+function Ln(a,b,e,f,k,w){x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.strokeStyle=k;x.lineWidth=w||2;x.stroke()}
+function Ar(a,b,e,f,k,w){Ln(a,b,e,f,k,w);const g=Math.atan2(f-b,e-a);x.beginPath();x.moveTo(e,f);x.lineTo(e-14*Math.cos(g-.45),f-14*Math.sin(g-.45));x.lineTo(e-14*Math.cos(g+.45),f-14*Math.sin(g+.45));x.closePath();x.fillStyle=k;x.fill()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+const qx=q=>40+(q+.6)/2.4*420,Gy=G=>290-G*110;
+function D(t){const dG=-(0.1+1.9*(Math.sin(t*.5)*.5+.5)),qs=(1+dG)/2,Ga=qs*qs;
+x.save();x.beginPath();x.rect(20,20,460,560);x.clip();
+for(const [f,k] of [[q=>q*q,"#0E7490"],[q=>(q-1)**2+dG,"#B45309"]]){x.beginPath();for(let q=-.6;q<=1.8;q+=.02){const X=qx(q),Y=Gy(f(q));if(q>-.6)x.lineTo(X,Y);else x.moveTo(X,Y)}x.strokeStyle=k;x.lineWidth=4;x.stroke()}
+x.setLineDash([5,6]);Ln(qx(-.3),Gy(0),qx(1.2),Gy(0),"rgba(100,116,139,.45)",1.5);Ln(qx(1),Gy(0),qx(1),Gy(dG),"rgba(242,165,65,.7)",2);x.setLineDash([]);
+if(Ga>.004)Ar(qx(qs),Gy(0),qx(qs),Gy(Ga)+2,"#1A2233",3);C(qx(qs),Gy(Ga),8,"#1A2233");
+x.restore();
+T("D*A",qx(-.45),Gy(.1)-60,26,"#0E7490","left",600);T("D⁺A⁻",qx(1.25),Gy(dG+.3)+6,26,"#B45309","left",600);
+T("ΔG°",qx(1)+10,(Gy(0)+Gy(dG))/2+8,24,"#B45309");T("ΔG‡",qx(qs)-10,Gy(Ga/2)+8,24,"#1A2233","right");
+T("nuclear coordinate q →",250,612,24,"#6B7280","center");
+const lx=v=>540+v/2*290,ly=v=>80-v*54;
+T("log k",540,50,24,"#4A5568","left",600);Ln(540,360,830,360,"#94A3B8",2);Ln(540,70,540,360,"#94A3B8",2);
+x.beginPath();for(let v=0;v<=2.001;v+=.02){const X=lx(v),Y=ly(-((1-v)**2)/.2);if(v)x.lineTo(X,Y);else x.moveTo(X,Y)}x.strokeStyle="#1A2233";x.lineWidth=3;x.stroke();
+const v=-dG;C(lx(v),ly(-((1-v)**2)/.2),10,"#B45309");
+T("0",lx(0),392,24,"#4A5568","center");T("λ",lx(1),392,24,"#4A5568","center");T("2λ",lx(2),392,24,"#4A5568","center");T("−ΔG°",830,426,24,"#4A5568","right");
+T("normal",lx(.6),300,24,"#0E7490","center");T("inverted",lx(1.4),300,24,"#C0392B","center");
+const reg=v<.85?["normal region","#0E7490"]:(v<1.15?["≈ activationless","#B45309"]:["inverted region","#C0392B"]);
+T("−ΔG°/λ = "+v.toFixed(2),540,490,28,"#1A2233","left",600);T("ΔG‡ = (ΔG°+λ)²/4λ = "+Ga.toFixed(2)+" λ",540,530,24,"#4A5568");T(reg[0],540,570,28,reg[1],"left",600);
+}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<div data-build-in="rise 1" style="position:absolute;left:1040px;top:250px;width:704px;background:#FBF7EF;border-left:6px solid #B45309;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:2px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">k = (2π/ħ)|H_DA|² (4πλk_BT)^(−½)</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">    × exp[−(ΔG° + λ)² / 4λk_BT]</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#B45309">ΔG‡ = (ΔG° + λ)² / 4λ</p>
+</div>
+<div data-build-in="rise 2" style="position:absolute;left:1040px;top:440px;width:696px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#0E7490">Design rule</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Forward steps with −ΔG° ≈ λ are activationless. Recombination with −ΔG° ≫ λ falls in the inverted region and slows down.</p>
+</div>
+<div data-build-in="rise 3" style="position:absolute;left:1040px;top:676px;width:704px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#B45309">The cost of simulating it (Reiter 2023)</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">MD/QM/MM (DFT/MRCI) on all 96 Chls: energies fluctuate, pathways form transiently. Accurate, and very expensive.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#6B7280">Marcus 1956 · Marcus &amp; Sutin, BBA 1985 · Reiter, Kiss, Hauer &amp; de Vivie‑Riedle, Chem. Sci. 14, 3117 (2023)</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#6B7280;text-align:right">9</p>
+<aside>We watched energy become charge. But a charge pair wants to recombine and throw the energy away. How does nature lock it in? Marcus theory. Two parabolas: reactant D*A and product D+A−, displaced along a nuclear coordinate. The reorganisation energy λ sets the curvature, and the activation energy is (ΔG° + λ)² over 4λ. The animation drives ΔG° from slightly downhill to very downhill. As it gets more negative the crossing point slides down to the reactant minimum (activationless, −ΔG° = λ), then back up the other side: the inverted region, where more driving force makes the reaction slower. The right panel is log k versus driving force, a downward parabola. This is the design trick in photosynthetic reaction centres: forward steps sit near the top of the parabola and are fast, while the wasteful back reaction has a huge driving force, lands in the inverted region and is slow. Then the bridge to computation: Reiter and colleagues ran MD/QM/MM with DFT/MRCI on all 96 PSI chlorophylls and found that thermal fluctuations are large enough that there is no single fixed energy funnel. Pathways appear transiently. That is the end of nature’s story: absorb with an antenna, move in hops, trap in picoseconds, lock in the charge. It took evolution billions of years. Can we build something that does the same? And notice the cost of even simulating one protein; that will matter in the machine-learning section.</aside>
+</section>

@@ -1,0 +1,30 @@
+<section id="takeaways" data-transition="fade" style="background:#FFFFFF;color:#1A1408;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#3D2600;font-weight:600">Summary</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#3D2600"><b>absorb → move → separate → build → search → learn</b></p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:700;line-height:1.1;color:#1A1408">Conclusions: ML succeeds when it encodes photophysics</h2>
+<x-embed style="position:absolute;left:128px;top:300px;width:1100px;height:600px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=1100,DH=600;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function C(X,Y,r,k){x.beginPath();x.arc(X,Y,Math.max(r,0),0,6.2832);x.fillStyle=k;x.fill()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+const A=["E = hc/λ budget","6 ns clock (Jablonski)","Coupling & Förster","Antenna random walk","Marcus ET","QM/MM site energies"],B=["MLIP dopants (Sn₃O₄)","LLM‑chosen COF links","Descriptor chain CO₂RR","COF ML + physics","MOF graph transformer","MLIP basin hopping"];
+const Ed=[[0,0],[0,4],[1,2],[2,1],[2,3],[3,2],[4,2],[5,4],[5,5]],ny=i=>80+i*84+28;
+const bz=(p,q,u)=>{const a=1-u;return[a*a*a*340+3*a*a*u*550+3*a*u*u*550+u*u*u*760,a*a*a*p+3*a*a*u*p+3*a*u*u*q+u*u*u*q]};
+function node(X,Y,s,on){x.beginPath();x.rect(X,Y,320,56);x.fillStyle=on?"#FFF8EA":"#FBEBD0";x.fill();x.strokeStyle="#3D2600";x.lineWidth=on?3:1.5;x.stroke();T(s,X+160,Y+37,24,"#1A1408","center",600)}
+function D(t){const s=t%16,rev=Math.min(s/6,1)*Ed.length;
+T("Photophysics",20,48,26,"#3D2600","left",700);T("ML studies",760,48,26,"#3D2600","left",700);
+Ed.forEach(([i,j],k)=>{if(k>rev)return;const f=Math.min(rev-k,1),p=ny(i),q=ny(j);x.beginPath();for(let u=0;u<=f+.001;u+=.02){const [X,Y]=bz(p,q,u);if(u)x.lineTo(X,Y);else x.moveTo(X,Y)}x.strokeStyle="rgba(26,20,8,.45)";x.lineWidth=2.5;x.stroke();if(f>=1){const [X,Y]=bz(p,q,(t*.35+k*.13)%1);C(X,Y,7,"#1A2233")}});
+const act=Math.floor(rev);A.forEach((s2,i)=>node(20,80+i*84,s2,Ed.some((e,k)=>k==act&&e[0]==i)));B.forEach((s2,i)=>node(760,80+i*84,s2,Ed.some((e,k)=>k==act&&e[1]==i)));
+}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<p data-build-in="rise 1" style="position:absolute;left:1280px;top:300px;width:512px;font-size:26px;line-height:1.4;color:#1A1408"><b>1 · The clock rules.</b> Every step must beat ~6 ns of decay; nature finishes in tens of ps.</p>
+<p data-build-in="rise 2" style="position:absolute;left:1280px;top:450px;width:512px;font-size:26px;line-height:1.4;color:#1A1408"><b>2 · Yield is a product.</b> Screen whole systems, not one property: Φ = Π η.</p>
+<p data-build-in="rise 3" style="position:absolute;left:1280px;top:566px;width:512px;font-size:26px;line-height:1.4;color:#1A1408"><b>3 · Validate.</b> A prediction counts after synthesis and spectroscopy: Sn₃O₄, COF‑343, Thz‑COF.</p>
+<p data-build-in="rise 4" style="position:absolute;left:1280px;top:716px;width:512px;font-size:26px;line-height:1.4;color:#1A1408"><b>4 · Next.</b> ML for excited states, and clean, shared photocatalysis data.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#3D2600">Each link pairs a photophysical concept with the ML study that encodes it · references on the next two slides</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#3D2600;text-align:right">17</p>
+<aside>Bring it back to the photon we started with. It arrived carrying about 1.8 eV and had roughly 6 nanoseconds. Nature caught it with an antenna, moved it in sub-picosecond hops, trapped it in tens of picoseconds, and locked in the charge using Marcus’s inverted region. When we tried to copy that, we fell one to two orders of magnitude short, and the search space was too big to explore by hand. The animation draws the links: every successful AI study from the machine-learning section encodes a rule from the photosynthesis section. The energy budget becomes band gaps. Coupling and transfer become donor-acceptor design in COFs and physics descriptors. Rate competition and Marcus become the three-step descriptor chain. QM/MM becomes ML surrogates and basin hopping. Four takeaways. One: the clock rules everything; any design must beat excited-state decay. Two: yield is a product of steps, so screen whole systems. Three: a prediction only counts after synthesis and spectroscopy. Four: the frontier is ML for excited states and clean, shared data. Thank the audience and take questions.</aside>
+</section>

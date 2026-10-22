@@ -1,0 +1,56 @@
+<section id="mechanism" data-transition="fade" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#0E7490;font-weight:600">Machine learning · mechanism</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#6B7280">absorb → move → separate → build → search → <span style="color:#0E7490"><b>learn</b></span></p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">ML potentials resolve interfacial mechanism</h2>
+<x-embed style="position:absolute;left:128px;top:250px;width:900px;height:660px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=900,DH=660;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function C(X,Y,r,k){x.beginPath();x.arc(X,Y,Math.max(r,0),0,6.2832);x.fillStyle=k;x.fill()}
+function Ln(a,b,e,f,k,w){x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.strokeStyle=k;x.lineWidth=w||2;x.stroke()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+const W5=[[.72,.3,-1,.08],[.3,.35,-.75,.1],[.45,.72,-.7,.09],[.8,.75,-.6,.07],[.2,.8,-.5,.08]];
+const E=(u,v)=>W5.reduce((s,w)=>s+w[2]*Math.exp(-((u-w[0])**2+(v-w[1])**2)/(2*w[3]*w[3])),0)+.4*((u-.5)**2+(v-.5)**2);
+const px=u=>30+u*600,py=v=>30+v*600;
+const off=document.createElement("canvas");off.width=150;off.height=150;const oc=off.getContext("2d"),im=oc.createImageData(150,150);
+let mn=9,mx=-9;const G=[];for(let j=0;j<150;j++)for(let i=0;i<150;i++){const e=E(i/149,j/149);G.push(e);mn=Math.min(mn,e);mx=Math.max(mx,e)}
+G.forEach((e,k)=>{const n=(e-mn)/(mx-mn);let r,g,b;if(n<.5){const f=n/.5;r=14+(125-14)*f;g=116+(190-116)*f;b=144+(205-144)*f}else{const f=(n-.5)/.5;r=125+(248-125)*f;g=190+(250-190)*f;b=205+(252-205)*f}im.data[k*4]=r;im.data[k*4+1]=g;im.data[k*4+2]=b;im.data[k*4+3]=255});oc.putImageData(im,0,0);
+const cl=v=>Math.min(Math.max(v,.02),.98);
+function relax(p){const path=[p.slice()];let [u,v]=p;for(let k=0;k<70;k++){const h=1e-3,gu=(E(u+h,v)-E(u-h,v))/(2*h),gv=(E(u,v+h)-E(u,v-h))/(2*h);u=cl(u-.004*gu/Math.max(Math.hypot(gu,gv)*.1,.2));v=cl(v-.004*gv/Math.max(Math.hypot(gu,gv)*.1,.2));path.push([u,v])}return path}
+let cur=relax([.2,.8]).pop(),best=cur.slice(),vis=[cur.slice()],cyc=-1,kp,path,acc,n=0;
+const gauss=()=>Math.sqrt(-2*Math.log(Math.random()+1e-9))*Math.cos(6.2832*Math.random());
+function D(t){const k=Math.floor(t/2.4),s=t-k*2.4;
+if(k!=cyc){if(path&&acc){cur=path[path.length-1].slice();vis.push(cur.slice());if(E(cur[0],cur[1])<E(best[0],best[1]))best=cur.slice()}if(vis.length>14)vis.shift();cyc=k;n++;kp=[cl(cur[0]+gauss()*.2),cl(cur[1]+gauss()*.2)];path=relax(kp);const m=path[path.length-1];acc=Math.random()<Math.min(1,Math.exp(-(E(m[0],m[1])-E(cur[0],cur[1]))/.15))}
+x.imageSmoothingEnabled=true;x.drawImage(off,30,30,600,600);
+vis.forEach(p=>C(px(p[0]),py(p[1]),5,"rgba(26,34,51,.55)"));
+C(px(best[0]),py(best[1]),14,"rgba(242,165,65,.35)");C(px(best[0]),py(best[1]),7,"#B45309");
+T("CO₂ @ Cu/Pt–TiO₂ interface",px(.72),py(.3)-30,24,"#1A2233","center",600);
+C(px(cur[0]),py(cur[1]),10,"#1A2233");
+let ph=0;if(s<.5){ph=1;x.setLineDash([6,6]);Ln(px(cur[0]),py(cur[1]),px(kp[0]),py(kp[1]),"#1A2233",2);x.setLineDash([]);C(px(kp[0]),py(kp[1]),7,"#C0392B")}
+else{const q=Math.min((s-.5)/1.2,1),m=Math.floor(q*(path.length-1));ph=q<1?2:3;x.beginPath();for(let i=0;i<=m;i++){const p=path[i];if(i)x.lineTo(px(p[0]),py(p[1]));else x.moveTo(px(p[0]),py(p[1]))}x.strokeStyle="#C0392B";x.lineWidth=3;x.stroke();C(px(path[m][0]),py(path[m][1]),7,"#C0392B");
+if(ph==3){const p=path[path.length-1];T(acc?"accept":"reject",px(p[0])+14,py(p[1])+8,26,acc?"#0E7490":"#C0392B","left",600)}}
+const bx=660;T("basin hopping",bx,60,28,"#1A2233","left",600);
+[["1 · kick",1],["2 · relax on",2],["   ML forces",2],["3 · Metropolis",3],["   e^(−ΔE/kT)",3]].forEach(([s2,p],i)=>T(s2,bx,110+i*36,24,p==ph?"#B45309":"#6B7280","left",p==ph?600:400));
+T("hops: "+n,bx,330,24,"#4A5568");T("best E: "+E(best[0],best[1]).toFixed(2),bx,366,24,"#4A5568");
+const gb=Math.hypot(best[0]-.72,best[1]-.3)<.05;T(gb?"global minimum":"still searching",bx,402,24,gb?"#B45309":"#6B7280","left",600);
+T("toy 2‑D landscape",bx,600,24,"#6B7280");T("low E = dark",bx,632,24,"#6B7280");
+}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<div data-build-in="rise 1" style="position:absolute;left:1080px;top:250px;width:656px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#0E7490">CuPt/TiO₂ (Sumaria 2024)</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Bias‑corrected ML potential on DFT + basin hopping: CO₂ binds C to Pt with one O in a TiO₂ vacancy; the interface stabilises *CO and CH intermediates → methane.</p>
+</div>
+<div data-build-in="rise 2" style="position:absolute;left:1080px;top:556px;width:664px;background:#FBF7EF;border-left:6px solid #0E7490;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:2px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">E ≈ Σᵢ εᵢ(Gᵢ)   Behler–Parrinello</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#0E7490">E = E_ML + δ_bias   correction</p>
+</div>
+<div data-build-in="rise 3" style="position:absolute;left:1080px;top:700px;width:656px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#B45309">Parallel with PSI simulations</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Reiter’s 96 site energies and MLIP sampling both buy statistics. Next: ML excited states.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#6B7280">Sumaria et al., J. Phys. Chem. C 128, 14247 (2024) · Behler &amp; Parrinello 2007 · Westermayr &amp; Marquetand, Chem. Rev. 2021</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#6B7280;text-align:right">16</p>
+<aside>Finding a material is not the same as understanding it. The last role for AI: explaining mechanism, not just ranking materials. Sumaria and colleagues (J. Phys. Chem. C 2024) studied CO2 photoreduction on CuPt nanoparticles on TiO2. The configuration space of CO2 on a bimetallic particle on an oxide is enormous, so they trained a machine-learning interatomic potential on DFT, added a bias correction, and used basin-hopping Monte Carlo to sample many adsorption geometries. The animation is a toy version of basin hopping: kick the structure, relax it downhill on the ML forces, then accept or reject the new minimum with a Metropolis test. Over a few hops it finds the deepest basin. Their result: CO2 prefers the metal-oxide interface, with carbon on a Pt site and one oxygen filling a TiO2 oxygen vacancy, and the interface stabilises *CO and CH-containing intermediates, which favours methane. They compared this with photocatalysis experiments across Cu:Pt compositions. The Behler-Parrinello idea underneath is that the total energy is a sum of atomic energies, each a learned function of that atom’s local environment. This mirrors the photosynthesis section: Reiter’s QM/MM site energies and an MLIP both buy statistical sampling that brute-force quantum chemistry can’t afford. The next frontier is ML for excited states (Westermayr and Marquetand 2021), which is exactly what pigment-protein complexes like PSI would need.</aside>
+</section>

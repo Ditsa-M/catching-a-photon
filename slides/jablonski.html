@@ -1,0 +1,54 @@
+<section id="jablonski" data-transition="fade" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#B45309;font-weight:600">Excited‑state kinetics</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#6B7280"><span style="color:#B45309"><b>absorb</b></span> → move → separate → build → search → learn</p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">The excited state lives for nanoseconds</h2>
+<x-embed style="position:absolute;left:128px;top:250px;width:900px;height:660px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=900,DH=660;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function C(X,Y,r,k){x.beginPath();x.arc(X,Y,Math.max(r,0),0,6.2832);x.fillStyle=k;x.fill()}
+function Ln(a,b,e,f,k,w){x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.strokeStyle=k;x.lineWidth=w||2;x.stroke()}
+function Ar(a,b,e,f,k,w){Ln(a,b,e,f,k,w);const g=Math.atan2(f-b,e-a);x.beginPath();x.moveTo(e,f);x.lineTo(e-16*Math.cos(g-.45),f-16*Math.sin(g-.45));x.lineTo(e-16*Math.cos(g+.45),f-16*Math.sin(g+.45));x.closePath();x.fillStyle=k;x.fill()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+const S0=540,S1=270,S2=90,T1=380;
+const steps=[[0,1.2,"1 · Absorption S₀ → S₂ (Soret ≈ 430 nm): femtoseconds"],[1.2,2.4,"2 · Internal conversion S₂ → S₁ + vibrational relaxation: ≲ 200 fs"],[2.4,4,"3 · Fluorescence S₁ → S₀ (Qy ≈ 670 nm): τ ≈ 6 ns, Φ_F ≈ 0.3"],[4,5.6,"4 · Intersystem crossing → T₁ → sensitises ¹O₂ (photodamage)"],[5.6,7.2,"5 · In PSI, energy transfer to a neighbour wins: sub‑ps per hop"]];
+function lev(y,x0,x1,lab,k){Ln(x0,y,x1,y,k,4);for(let v=1;v<3;v++)Ln(x0,y-v*20,x1,y-v*20,"rgba(100,116,139,.25)",1.5);T(lab,x0-16,y+8,28,k,"right",600)}
+function wav(xx,ya,yb,p,k){x.beginPath();for(let u=0;u<=p+.001;u+=.01){const yy=ya+(yb-ya)*u,X=xx+Math.sin(u*40)*8;if(u)x.lineTo(X,yy);else x.moveTo(X,yy)}x.strokeStyle=k;x.lineWidth=3;x.stroke()}
+function D(t){const s=t%9;const P=i=>Math.min(Math.max((s-steps[i][0])/(steps[i][1]-steps[i][0]),0),1);let cur=-1;steps.forEach((q,i)=>{if(s>=q[0]&&s<q[1])cur=i});
+lev(S0,90,420,"S₀","#4A5568");lev(S1,90,420,"S₁","#1A2233");lev(S2,90,420,"S₂","#1A2233");
+Ln(470,T1,640,T1,"#64748B",4);T("T₁",660,T1+8,28,"#64748B","left",600);
+Ln(700,S1,860,S1,"#0E7490",4);T("neighbour S₁",780,S1-24,24,"#0E7490","center");
+const al=i=>i==cur?1:.35;
+let p=P(0);if(p>0){x.globalAlpha=al(0);Ar(140,S0,140,S0+(S2-S0)*p,"#2563EB",5);T("1",112,330,26,"#2563EB","center",600)}
+p=P(1);if(p>0){x.globalAlpha=al(1);wav(200,S2,S1,p,"#7C3AED");T("2",226,180,26,"#7C3AED","center",600)}
+p=P(2);if(p>0){x.globalAlpha=al(2);Ar(280,S1,280,S1+(S0-S1)*p,"#C0392B",5);T("3",308,420,26,"#C0392B","center",600)}
+p=P(3);if(p>0){x.globalAlpha=al(3);x.setLineDash([8,6]);Ar(380,S1,380+(520-380)*p,S1+(T1-S1)*p,"#64748B",3);x.setLineDash([]);T("4",470,330,26,"#64748B","center",600);if(p>.6)T("³Chl + O₂ → ¹O₂",555,T1+56,24,"#64748B","center")}
+p=P(4);if(p>0){x.globalAlpha=al(4);Ar(420,S1,420+(700-420)*p,S1,"#0E7490",5);T("5",560,S1-16,26,"#0E7490","center",600)}
+x.globalAlpha=1;
+let ex=null;const q=P(cur<0?4:cur);
+if(cur==0)ex=[140,S0+(S2-S0)*q];else if(cur==1)ex=[200,S2+(S1-S2)*q];else if(cur==2)ex=[280,S1+(S0-S1)*q];else if(cur==3)ex=[380+140*q,S1+(T1-S1)*q];else if(cur==4)ex=[420+280*q,S1];
+if(ex){C(ex[0],ex[1],18,"rgba(242,165,65,.3)");C(ex[0],ex[1],9,"#B45309")}
+x.fillStyle="rgba(255,255,255,.9)";x.fillRect(0,580,900,80);
+T(cur>=0?steps[cur][2]:"Kasha’s rule: emission, transfer and chemistry start from S₁",16,612,24,"#1A2233");
+T("fs absorb · ≲ 200 fs IC · sub‑ps EET · ns fluorescence / ISC",16,646,24,"#6B7280");
+}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<div data-build-in="rise 1" style="position:absolute;left:1080px;top:250px;width:656px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#0E7490">Kasha’s rule</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Upper states relax in femtoseconds, so emission, transfer and chemistry start from the lowest S₁: for Chl, the Qy state.</p>
+</div>
+<div data-build-in="rise 2" style="position:absolute;left:1080px;top:486px;width:656px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#0E7490">Gouterman four‑orbital model</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Two HOMOs and two LUMOs mix into a strong Soret band (≈ 430 nm) and weaker Q bands (Qy ≈ 670 nm). The protein tunes Qy.</p>
+</div>
+<div data-build-in="rise 3" style="position:absolute;left:1080px;top:722px;width:664px;background:#FBF7EF;border-left:6px solid #B45309;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:2px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">Φ_F = kᵣ / (kᵣ + k_IC + k_ISC + k_EET)</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">Chl a: τ ≈ 6 ns, Φ_F ≈ 0.32</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#B45309">→ kᵣ = Φ_F/τ ≈ 5 × 10⁷ s⁻¹</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#6B7280">Kasha 1950 · Gouterman 1961 · Weber &amp; Teale 1957 (Chl a Φ_F in ether)</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#6B7280;text-align:right">3</p>
+<aside>Walk the Jablonski diagram with the animation; each numbered process lights up in turn and the caption gives its timescale. 1: absorption into S2, the Soret band near 430 nm. 2: internal conversion down to S1 in a couple of hundred femtoseconds, which is Kasha’s rule in action: whatever you excite, the chemistry starts from the lowest singlet, here the Qy state. 3: in solution, chlorophyll a fluoresces from S1 with a lifetime of roughly 6 ns and a quantum yield of about 0.32 (Weber and Teale), which gives a radiative rate around 5 × 10^7 per second. 4: intersystem crossing to the triplet, which can hand energy to oxygen and make singlet oxygen. This is why carotenoids sit next to chlorophylls in PSI. 5: in the protein, transfer to a neighbouring chlorophyll happens in well under a picosecond, so it beats every loss channel. Gouterman’s four-orbital model explains why chlorophyll has an intense Soret band and weaker Q bands, and why the protein environment can tune Qy. So the clock is set: about 6 ns, and only process 5, transfer, saves the energy. But there is a second problem. How often does a chlorophyll even get a photon?</aside>
+</section>

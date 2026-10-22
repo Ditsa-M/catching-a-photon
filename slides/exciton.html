@@ -1,0 +1,52 @@
+<section id="exciton" data-transition="fade" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#B45309;font-weight:600">Excitonic coupling</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#6B7280">absorb → <span style="color:#B45309"><b>move</b></span> → separate → build → search → learn</p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">Excitonic coupling between neighbouring pigments</h2>
+<x-embed style="position:absolute;left:128px;top:250px;width:860px;height:660px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=860,DH=660;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function Ln(a,b,e,f,k,w){x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.strokeStyle=k;x.lineWidth=w||2;x.stroke()}
+function Ar(a,b,e,f,k,w){Ln(a,b,e,f,k,w);const g=Math.atan2(f-b,e-a);x.beginPath();x.moveTo(e,f);x.lineTo(e-16*Math.cos(g-.45),f-16*Math.sin(g-.45));x.lineTo(e-16*Math.cos(g+.45),f-16*Math.sin(g+.45));x.closePath();x.fillStyle=k;x.fill()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+function G(c0,s,a){x.beginPath();for(let X=40;X<=820;X+=4){const Y=620-a*Math.exp(-((X-c0)**2)/(2*s*s));if(X>40)x.lineTo(X,Y);else x.moveTo(X,Y)}}
+function D(t){const th=(45+45*Math.sin(t*.6))*Math.PI/180,k=1-3*Math.cos(th)**2;
+T("θ = "+(th*180/Math.PI).toFixed(0)+"°",40,48,30,"#1A2233","left",600);
+T("κ = 1 − 3cos²θ = "+k.toFixed(2),40,86,26,"#4A5568");
+x.setLineDash([6,8]);Ln(50,240,410,240,"rgba(100,116,139,.4)",1.5);x.setLineDash([]);
+for(const cx of [140,320]){x.save();x.translate(cx,240);x.rotate(-th);x.fillStyle="rgba(62,158,98,.22)";x.strokeStyle="#2F7D4F";x.lineWidth=2;x.beginPath();x.rect(-48,-48,96,96);x.fill();x.stroke();x.restore();const dx=Math.cos(th)*66,dy=Math.sin(th)*66;Ar(cx-dx,240+dy,cx+dx,240-dy,"#B45309",4)}
+Ln(140,350,320,350,"#6B7280",2);Ln(140,340,140,360,"#6B7280",2);Ln(320,340,320,360,"#6B7280",2);T("R",230,384,24,"#6B7280","center");
+const E0=240,sc=40,yb=E0-k*sc,yd=E0+k*sc;
+T("monomer",520,130,24,"#6B7280","center");T("dimer",670,130,24,"#6B7280","center");
+Ln(480,E0,560,E0,"#4A5568",4);T("E₀",470,E0+8,26,"#4A5568","right");
+x.setLineDash([4,6]);Ln(560,E0,620,yb,"rgba(100,116,139,.45)",1.5);Ln(560,E0,620,yd,"rgba(100,116,139,.45)",1.5);x.setLineDash([]);
+Ln(620,yd,720,yd,"#94A3B8",3);Ln(620,yb,720,yb,"#B45309",6);
+if(Math.abs(k)>.3){T("bright |+⟩",732,yb+8,24,"#B45309");T("dark |−⟩",732,yd+8,24,"#6B7280")}else T("≈ degenerate",732,E0+8,24,"#4A5568");
+let lab="θ ≈ 54.7° (magic angle): V ≈ 0, no shift",lc="#4A5568";if(k<-.3){lab="J‑type, head‑to‑tail: bright state lower → red shift";lc="#C0392B"}else if(k>.3){lab="H‑type, side‑by‑side: bright state upper → blue shift";lc="#2563EB"}
+T(lab,40,446,26,lc,"left",600);
+const cc=430-k*60,kc=k<0?"#C0392B":"#2563EB";
+G(cc,45,150);x.lineTo(820,620);x.lineTo(40,620);x.closePath();x.fillStyle=k<0?"rgba(229,96,77,.18)":"rgba(127,168,255,.18)";x.fill();
+G(cc,45,150);x.strokeStyle=kc;x.lineWidth=4;x.stroke();
+x.setLineDash([6,6]);G(430,45,110);x.strokeStyle="#4A5568";x.lineWidth=2;x.stroke();x.setLineDash([]);
+Ln(40,620,820,620,"#94A3B8",2);T("monomer (dashed)",40,652,24,"#6B7280");T("wavelength →",820,652,24,"#6B7280","right");
+}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<div data-build-in="rise 1" style="position:absolute;left:1040px;top:250px;width:704px;background:#FBF7EF;border-left:6px solid #B45309;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:2px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">V = κ μ² / (4πε₀ n² R³)</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">κ = cos θ₁₂ − 3 cos θ₁ cos θ₂</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">E± = E₀ ± V, |±⟩ = (|eg⟩ ± |ge⟩)/√2</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#B45309">f± ∝ |μ₁ ± μ₂|²</p>
+</div>
+<div data-build-in="rise 2" style="position:absolute;left:1040px;top:480px;width:696px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#0E7490">J vs H aggregates</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Head‑to‑tail (κ &lt; 0): the bright state is the lower one → <span style="color:#C0392B"><b>red shift</b></span>. Side‑by‑side (κ &gt; 0): bright state on top → blue shift.</p>
+</div>
+<div data-build-in="rise 3" style="position:absolute;left:1040px;top:716px;width:704px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:26px;line-height:1.4;color:#2D3748"><b>Worked example:</b> μ ≈ 4 D, R = 0.9 nm, κ = −2, n² ≈ 2 → V ≈ −110 cm⁻¹, enough for sub‑ps transfer. The same physics colours dye aggregates and stacked COF layers.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#6B7280">Kasha, Rawls &amp; El‑Bayoumi 1965 · V(cm⁻¹) ≈ 5.04 κ μ²(D²) / n²R³(nm³), point‑dipole approximation</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#6B7280;text-align:right">5</p>
+<aside>The antenna only works if energy can jump from molecule to molecule, fast. What makes it jump? Coupling. Two identical chlorophylls with transition dipoles μ, separated by R, couple through the dipole-dipole interaction V. The orientation factor κ decides the sign. The two new eigenstates are the symmetric and antisymmetric combinations, split by 2V, and their oscillator strengths go as the square of the sum or difference of the dipoles. Watch the animation: as θ goes to 0 (head-to-tail) κ approaches −2, the bright in-phase state drops below the monomer, and the band red-shifts: a J-aggregate. At 90 degrees (side-by-side) κ = +1 and the bright state moves up: an H-aggregate, blue shift. At the magic angle 54.7 degrees the coupling vanishes. Worked example: chlorophyll Qy is about 4 debye; at 0.9 nm, κ = −2 and screening n² ≈ 2 gives V around −110 wavenumbers, which corresponds to sub-picosecond energy exchange between neighbours. Plant this idea for later: the same coupling sets the colour of dye aggregates and of stacked COF layers, which is exactly what the AI-designed photocatalysts in the machine-learning section exploit. Coupling tells us energy can move. How fast, and in which regime?</aside>
+</section>
