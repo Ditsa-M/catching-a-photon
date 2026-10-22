@@ -3,7 +3,7 @@
 **From photosynthetic light harvesting to machine-learning-designed photocatalysts**
 Ditsa Mallick · CHM 598, Introduction to Photochemistry
 
-An excited molecule has about 6 ns before its energy is lost. This 19-slide talk follows that energy through the chain *absorb → move → separate → build → search → learn*:
+An excited molecule has about 6 ns before its energy is lost. This 20-slide talk follows that energy through the chain *absorb → move → separate → build → search → learn*:
 
 | # | Slide | Topic |
 |---|---|---|
@@ -19,8 +19,9 @@ An excited molecule has about 6 ns before its energy is lost. This 19-slide talk
 | 10 | Artificial photosynthesis | Design principles and the efficiency gap |
 | 11 | Field overview | Timeline and OpenAlex publication counts |
 | 12–16 | Machine learning | Screening, descriptors, closed-loop discovery, small-data learning, ML potentials |
-| 17 | Summary | |
-| 18–19 | References | |
+| 17 | Summary | Conclusions |
+| 18 | Thank you | Closing slide with animated wordmark |
+| 19–20 | References | |
 
 Every slide has a live canvas animation, worked equations, citations and speaker notes.
 
@@ -41,7 +42,7 @@ Open `index.html` in a browser (or the GitHub Pages site for this repo).
 
 ## Notes on the content
 
-- Data come only from published work; the full references are on slides 18–19.
+- Data come only from published work; the full references are on slides 19–20.
 - These animations are schematic teaching models, not measured data, and their slides say so: the TA traces and map, the PSI random walk, the Bayesian-optimisation curve and the basin-hopping landscape.
 - The Sn₃O₄ "≈16×" H₂ enhancement comes from the institute's press release. Check it against the JACS paper's conditions before quoting it.
 - Publication counts are from an OpenAlex title/abstract query retrieved on 18 Oct 2026.

@@ -1,0 +1,47 @@
+<section id="thanks" data-transition="fade" style="background:#E9ECEB;color:#111418;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column">
+<div style="position:absolute;left:0;top:150px;width:1920px;height:2px;background:#CCD1CF"></div>
+<div style="position:absolute;left:0;top:760px;width:1920px;height:2px;background:#CCD1CF"></div>
+<div style="position:absolute;left:640px;top:0;width:2px;height:760px;background:#CCD1CF"></div>
+<div style="position:absolute;left:1500px;top:0;width:2px;height:760px;background:#CCD1CF"></div>
+<p style="position:absolute;left:64px;top:62px;width:540px;font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#4A5568;font-weight:600">CHM 598 · Photochemistry</p>
+<p style="position:absolute;left:1532px;top:62px;width:340px;font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#4A5568;font-weight:600;text-align:right">Q &amp; A</p>
+<div data-build-in="rise 1 auto" style="position:absolute;left:642px;top:230px;width:858px;background:#FFFFFF;border:1px solid #CCD1CF;display:flex;flex-direction:column">
+<div style="padding:36px 40px 28px">
+<h1 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:128px;font-weight:700;line-height:1.05;letter-spacing:-5px;color:#111418">thank‑you/</h1>
+</div>
+<div style="border-top:2px dashed #CCD1CF"></div>
+<div style="padding:30px 40px">
+<p style="font-size:28px;line-height:1.45;color:#4A5568">Thanks for listening. Questions, comments and corrections are very welcome.</p>
+</div>
+<div style="border-top:2px dashed #CCD1CF"></div>
+<div style="padding:34px 40px 36px">
+<div style="background:#2F7D4F;border-radius:8px;padding:22px 28px;display:flex;flex-direction:row;justify-content:space-between;align-items:center">
+<p style="font-size:30px;font-weight:600;color:#FFFFFF">Questions?</p>
+<p style="font-size:30px;font-weight:600;color:#FFFFFF">↗</p>
+</div>
+</div>
+</div>
+<p data-build-in="fade 2 auto" style="position:absolute;left:64px;top:560px;width:540px;font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#6B7280;font-weight:600">slides/</p>
+<p data-build-in="fade 2 auto" style="position:absolute;left:64px;top:600px;width:540px;font-size:28px;line-height:1.35;color:#111418">ditsa‑m.github.io/ catching‑a‑photon</p>
+<p data-build-in="fade 3 auto" style="position:absolute;left:1532px;top:560px;width:340px;font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#6B7280;font-weight:600;text-align:right">speaker/</p>
+<p data-build-in="fade 3 auto" style="position:absolute;left:1532px;top:600px;width:340px;font-size:28px;line-height:1.35;color:#111418;text-align:right"><b>Ditsa Mallick</b></p>
+<x-embed style="position:absolute;left:0px;top:762px;width:1920px;height:318px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=1920,DH=318;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="'Arial Black','Helvetica Neue',system-ui,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function C(X,Y,r,k){x.beginPath();x.arc(X,Y,Math.max(r,0),0,6.2832);x.fillStyle=k;x.fill()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+const W0="PHOTON",X0=40,TW=1660;let FS=400,pos=[];
+function lay(){x.font="900 100px "+SF;const w=x.measureText(W0).width;FS=100*TW/w;x.font="900 "+FS+"px "+SF;let a=X0;pos=[...W0].map(ch=>{const p=[a,x.measureText(ch).width];a+=p[1];return p})}
+function D(t){if(!pos.length)lay();x.font="900 "+FS+"px "+SF;x.textAlign="left";
+const base=34+FS*.72,px=((t%5)/3.2)*(DW+400)-200,py=150;
+[...W0].forEach((ch,i)=>{let k=Math.min(Math.max((t-.15*i)/.9,0),1);k=1-(1-k)**3;const y=base+(1-k)*340;
+let col="#111418";if(ch=="O"){const mid=pos[i][0]+pos[i][1]/2,d=Math.abs(px-mid);if(d<pos[i][1]*.6)col="#B45309"}
+x.fillStyle=col;x.fillText(ch,pos[i][0],y)});
+const ex=X0+TW+28;x.beginPath();for(let u=0;u<=1.001;u+=.02){const X=ex+u*150,Y=70+Math.sin(u*14-t*6)*18;if(u)x.lineTo(X,Y);else x.moveTo(X,Y)}x.strokeStyle="#B45309";x.lineWidth=16;x.lineCap="round";x.stroke();
+if(t>1.2&&px>-150&&px<DW+150){x.beginPath();for(let u=0;u<=1.001;u+=.02){const X=px-u*180,Y=py+Math.sin(u*22-t*24)*14;if(u)x.lineTo(X,Y);else x.moveTo(X,Y)}x.strokeStyle="rgba(242,165,65,.9)";x.lineWidth=6;x.stroke();C(px,py,16,"rgba(242,165,65,.45)");C(px,py,8,"#B45309")}
+}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<aside>Closing slide. Thank the audience and open the floor for questions. The slides stay online at ditsa-m.github.io/catching-a-photon, which you can point people to. The animated wordmark is just a visual sign-off: a photon crosses the word, and each O lights up as it passes. The two reference slides follow this one if anyone asks for sources.</aside>
+</section>
