@@ -17,7 +17,12 @@ ASIDE = re.compile(r"<aside>(.*?)</aside>", re.S)
 SECTION = re.compile(r'<section id="([^"]+)"([^>]*)style="([^"]*)"')
 
 
+BLOBS = json.loads((ROOT / "assets" / "blobs.json").read_text()) if (ROOT / "assets" / "blobs.json").exists() else {}
+
+
 def convert(src):
+    for bid, path in BLOBS.items():
+        src = src.replace(f'src="/_blob/{bid}"', f'src="{path}"')
     src = EMBED.sub(lambda m: '<iframe class="embed" sandbox="allow-scripts" style="%s" srcdoc="%s"></iframe>'
                     % (m.group(1), html.escape(m.group(2), quote=True)), src)
     notes = ASIDE.search(src)

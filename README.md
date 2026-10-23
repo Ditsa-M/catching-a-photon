@@ -46,6 +46,7 @@ Open `index.html` in a browser (or the GitHub Pages site for this repo).
 - `slides/*.html`: one 1920×1080 slide per file, with inline styles; animations live in `<x-embed>` blocks.
 - `deck.json`: slide order and fonts.
 - `SCRIPT.md`: the full timed speaker script (also shown with **N** in the player).
+- `assets/`: PSI structure renders made in ChimeraX from the public PDB entry 5OY0 (Malavath et al. 2018); `scripts/` holds the render scripts.
 - `build.py`: regenerates `index.html` from the slides (`python3 build.py`).
 
 ## Notes on the content
