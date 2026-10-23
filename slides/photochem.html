@@ -1,0 +1,50 @@
+<section id="photochem" data-transition="fade" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#B45309;font-weight:600">Photochemistry vs thermal chemistry</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#6B7280"><span style="color:#B45309"><b>absorb</b></span> → move → separate → build → search → learn</p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">Light opens reaction paths that heat cannot</h2>
+<x-embed style="position:absolute;left:128px;top:250px;width:900px;height:660px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=900,DH=660;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function C(X,Y,r,k){x.beginPath();x.arc(X,Y,Math.max(r,0),0,6.2832);x.fillStyle=k;x.fill()}
+function Ln(a,b,e,f,k,w){x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.strokeStyle=k;x.lineWidth=w||2;x.stroke()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+function lobes(cx,cy,phi,sg){for(const s of [1,-1]){const a=phi+(s<0?Math.PI:0),X=cx+30*Math.sin(a),Y=cy-30*Math.cos(a);x.save();x.translate(X,Y);x.rotate(a);x.beginPath();x.ellipse(0,0,13,26,0,0,6.2832);x.fillStyle=(s*sg>0)?"rgba(14,116,144,.8)":"rgba(180,83,9,.8)";x.fill();x.restore()}}
+function panel(x0,title,sub,dis,t){
+T(title,x0+215,40,26,"#1A2233","center",600);T(sub,x0+215,74,24,dis?"#B45309":"#0E7490","center",600);
+const ly=[230,194,158,122];for(let i=0;i<4;i++){Ln(x0+24,ly[i],x0+84,ly[i],"#94A3B8",3);T("ψ"+"₁₂₃₄"[i],x0+94,ly[i]+8,24,"#4A5568")}
+const occ=dis?[2,1,1,0]:[2,2,0,0],homo=dis?2:1;x.strokeStyle="#B45309";x.lineWidth=2;x.strokeRect(x0+18,ly[homo]-14,72,28);
+occ.forEach((n,i)=>{if(n>0)C(x0+44,ly[i]-1,6,"#1A2233");if(n>1)C(x0+64,ly[i]-1,6,"#1A2233")});
+T("HOMO",x0+54,ly[homo]-22,24,"#B45309","center",600);
+const P=[[x0+190,400],[x0+230,300],[x0+350,300],[x0+390,400]];
+Ln(P[0][0],P[0][1],P[1][0],P[1][1],"#1A2233",4);Ln(P[1][0],P[1][1],P[2][0],P[2][1],"#1A2233",4);Ln(P[2][0],P[2][1],P[3][0],P[3][1],"#1A2233",4);
+const s=t%5;let k=Math.min(s/2,1);k=k*k*(3-2*k);const th=k*Math.PI/2;
+if(k>.95){x.setLineDash([]);Ln(P[0][0],P[0][1],P[3][0],P[3][1],"#2F7D4F",5);T("in‑phase overlap → σ bond",x0+290,470,24,"#2F7D4F","center",600)}
+lobes(P[0][0],P[0][1],th,1);lobes(P[3][0],P[3][1],dis?-th:th,dis?1:-1);
+P.forEach(p=>C(p[0],p[1],7,"#1A2233"));
+T(dis?"↻   ↺":"↻   ↻",x0+290,530,30,"#4A5568","center",600);
+}
+function D(t){panel(0,"Thermal (heat)","HOMO ψ₂ → conrotatory",0,t);Ln(450,20,450,560,"#DDE3EC",2);panel(450,"Photochemical (hν)","HOMO ψ₃ → disrotatory",1,t);
+C(330,598,9,"rgba(14,116,144,.8)");T("+ phase",346,606,24,"#4A5568");C(480,598,9,"rgba(180,83,9,.8)");T("− phase",496,606,24,"#4A5568");
+T("Butadiene → cyclobutene: same molecule, opposite stereochemistry",450,646,24,"#1A2233","center",600);
+}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<div data-build-in="rise 1" style="position:absolute;left:1080px;top:250px;width:656px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#0E7490">Light vs heat (lecture 14)</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">1 · Different activation, different selectivity. 2 · More product states reachable from S₁. 3 · Excited states are “electronic isomers”.</p>
+</div>
+<div data-build-in="rise 2" style="position:absolute;left:1080px;top:500px;width:664px;background:#FBF7EF;border-left:6px solid #B45309;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:2px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">E(D⁺/D*) = E(D⁺/D) − E₀₀</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">P700: +0.45 V − 1.77 eV</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#B45309">→ E(P700⁺/P700*) ≈ −1.3 V</p>
+</div>
+<div data-build-in="rise 3" style="position:absolute;left:1080px;top:690px;width:656px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#B45309">In biology</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">UV‑B [2+2] thymine dimers in DNA: photo‑allowed, thermally forbidden.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#6B7280">Woodward &amp; Hoffmann, JACS 87, 395 (1965) · CHM 598 lectures 13–15 · E(P700⁺/P700) ≈ +0.45 V: Brettel 1997</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#6B7280;text-align:right">3</p>
+<aside>[1:50–3:10] Why is photochemistry different from thermal chemistry? Three points from lecture 14. One: activation by light instead of heat changes selectivity. Two: the excited state sits 2 to 3 eV higher, so many more product states are thermodynamically reachable. Three: excited states are electronic isomers of the ground state, with a new electron distribution and often a new geometry. The animation is the textbook case, butadiene closing to cyclobutene. Thermally the HOMO is ψ2, whose terminal lobes have opposite phase, so both ends must rotate the same way, conrotatory, to overlap in phase. After absorbing light the HOMO is ψ3, with matching terminal phases, so the ring closes disrotatory. Same molecule, opposite stereochemistry: Woodward–Hoffmann. Biology shows the downside: UV-B makes thymine [2+2] dimers in DNA, photochemically allowed and thermally forbidden. And the redox point matters for the rest of this talk: an excited molecule is both a better oxidant and a better reductant. For P700, +0.45 V minus 1.77 eV gives about −1.3 V. Light turns a mild donor into one of the strongest reductants in biology.</aside>
+</section>

@@ -1,0 +1,47 @@
+<section id="rc" data-transition="fade" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#B45309;font-weight:600">Reaction centres</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#6B7280">absorb → move → <span style="color:#B45309"><b>separate</b></span> → build → search → learn</p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">Reaction centres: a two‑branch cofactor wire</h2>
+<x-embed style="position:absolute;left:128px;top:250px;width:900px;height:660px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=900,DH=660;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function C(X,Y,r,k){x.beginPath();x.arc(X,Y,Math.max(r,0),0,6.2832);x.fillStyle=k;x.fill()}
+function Ln(a,b,e,f,k,w){x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.strokeStyle=k;x.lineWidth=w||2;x.stroke()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+function box(X,Y,w,s,k,on){x.globalAlpha=on?1:.35;x.fillStyle="#FFFFFF";x.strokeStyle=k;x.lineWidth=3;x.beginPath();x.roundRect?x.roundRect(X-w/2,Y-22,w,44,10):x.rect(X-w/2,Y-22,w,44);x.fill();x.stroke();T(s,X,Y+8,24,k,"center",600);x.globalAlpha=1}
+const M=[{name:"Type II · purple bacterial RC",P:"P870",n:[["B_A",300,215],["B_B",600,215],["H_A",270,330],["H_B",630,330],["Q_A",300,450],["Q_B",600,450],["Fe",450,470]],paths:[[[450,110],[300,215],[270,330],[300,450],[450,470],[600,450]]],tl:[["~3 ps",170,275],["~200 ps",150,395],["~100 µs",450,520]],off:["B_B","H_B"]},
+{name:"Type I · Photosystem I",P:"P700",n:[["A₋₁",300,215],["A₋₁",600,215],["A₀",270,330],["A₀",630,330],["A₁",300,440],["A₁",600,440],["F_X",450,500],["F_A",450,555],["F_B",450,610]],paths:[[[450,110],[300,215],[270,330],[300,440],[450,500],[450,555],[450,610]],[[450,110],[600,215],[630,330],[600,440],[450,500],[450,555],[450,610]]],tl:[["~ps",170,275],["~30 ps",160,395],["200 ns",250,500],["20 ns",650,500]],off:[]}];
+function D(t){const m=Math.floor(t/9)%2,s=t%9,S=M[m];
+x.fillStyle="#F4F6FA";x.fillRect(80,70,740,450);T("P side (lumen)",880,96,24,"#6B7280","right");T("N side",880,505,24,"#6B7280","right");T("membrane",880,300,24,"#94A3B8","right");
+T(S.name,20,40,28,"#1A2233","left",700);
+x.setLineDash([6,8]);Ln(450,60,450,640,"rgba(100,116,139,.35)",1.5);x.setLineDash([]);T("C₂",462,640,24,"#94A3B8");
+box(450,110,170,"","#B45309",1);
+S.n.forEach(([l,X,Y])=>box(X,Y,92,l,l.startsWith("F")||l=="Fe"?"#7C3AED":"#0E7490",!S.off.includes(l)||X<450));
+T(S.P,450,118,24,"#B45309","center",700);
+S.paths.forEach(p=>{for(let i=0;i<p.length-1;i++){x.setLineDash([4,6]);Ln(p[i][0],p[i][1],p[i+1][0],p[i+1][1],"rgba(26,34,51,.25)",2);x.setLineDash([])}});
+const u=Math.min(Math.max((s-1)/5,0),1);
+S.paths.forEach((p,j)=>{const n=p.length-1,v=u*n,i=Math.min(v|0,n-1),f=v-i,X=p[i][0]+(p[i+1][0]-p[i][0])*f,Y=p[i][1]+(p[i+1][1]-p[i][1])*f;if(u>0&&u<1){C(X,Y,14,"rgba(242,165,65,.4)");C(X,Y,8,"#B45309")}});
+if(s<1.2){C(450,110,30+40*s,"rgba(242,165,65,"+(.4*(1-s/1.2)).toFixed(2)+")")}
+S.tl.forEach(([l,X,Y])=>T(l,X,Y,24,"#4A5568","center",600));
+if(!m)T("B branch inactive",600,560,24,"#94A3B8","center");else T("both branches active",640,610,24,"#7C3AED","center",600);
+}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<div data-build-in="rise 1" style="position:absolute;left:1080px;top:250px;width:656px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#0E7490">First membrane protein structure</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Purple bacterial RC, 1985 (Nobel 1988): pseudo‑C₂ cofactor pairs; electrons use one branch.</p>
+</div>
+<div data-build-in="rise 2" style="position:absolute;left:1080px;top:486px;width:656px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#7C3AED">Type II vs Type I</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Quinone acceptors (purple bacteria, PSII) vs Fe–S clusters (PSI, green sulfur bacteria).</p>
+</div>
+<div data-build-in="rise 3" style="position:absolute;left:1080px;top:686px;width:656px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#B45309">Why a special pair?</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Coupled dimer: lower‑energy trap, easier to oxidise, hole shared by two Chl.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#6B7280">Deisenhofer et al., Nature 318, 618 (1985) · Guergova‑Kuras et al., PNAS 98, 4437 (2001) · Brettel 1997 · Blankenship 2014 · schematic layout</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#6B7280;text-align:right">13</p>
+<aside>[12:50–14:10] Reaction centres are cofactor wires built in two branches with pseudo-two-fold symmetry. The purple bacterial reaction centre was the first membrane protein structure, by Deisenhofer, Michel and Huber in 1985, Nobel Prize 1988. At the top is the special pair, an excitonically coupled dimer: coupling lowers its excited-state energy so it acts as a trap, lowers its oxidation potential, and spreads the hole over two chlorophylls. In this type II centre the electron uses only one branch: special pair to accessory bacteriochlorophyll to pheophytin in about 3 ps, to quinone QA in about 200 ps, then to QB in about 100 microseconds. The animation then switches to type I, Photosystem I: the acceptors end in iron–sulfur clusters and both branches are active, with A1 to FX taking about 20 ns on one side and 200 ns on the other. Type II centres use quinones, as in purple bacteria and PSII; type I use Fe–S clusters, as in PSI and green sulfur bacteria. So why do electrons move so fast and so selectively through protein?</aside>
+</section>

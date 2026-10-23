@@ -1,0 +1,52 @@
+<section id="staircase" data-transition="fade" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#B45309;font-weight:600">Charge separation in PSI</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#6B7280">absorb → move → <span style="color:#B45309"><b>separate</b></span> → build → search → learn</p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">Photosystem I’s electron staircase</h2>
+<x-embed style="position:absolute;left:128px;top:250px;width:900px;height:660px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=900,DH=660;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function C(X,Y,r,k){x.beginPath();x.arc(X,Y,Math.max(r,0),0,6.2832);x.fillStyle=k;x.fill()}
+function Ln(a,b,e,f,k,w){x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.strokeStyle=k;x.lineWidth=w||2;x.stroke()}
+function Ar(a,b,e,f,k,w){Ln(a,b,e,f,k,w);const g=Math.atan2(f-b,e-a);x.beginPath();x.moveTo(e,f);x.lineTo(e-14*Math.cos(g-.45),f-14*Math.sin(g-.45));x.lineTo(e-14*Math.cos(g+.45),f-14*Math.sin(g+.45));x.closePath();x.fillStyle=k;x.fill()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+const ey=E=>80+(E+1.4)/2*400;
+const S=[["P700",.45,110],["P700*",-1.3,110],["A₀",-1.05,240],["A₁",-.82,370],["F_X",-.70,500],["F_A/F_B",-.55,630],["Fd",-.42,760]];
+const TL=["hν","~2 ps","~30 ps","20–200 ns","< 1 µs","~µs"],TC=[-15,-11.7,-10.5,-6.9,-6.3,-5];
+const lx=v=>110+(v+15)/12*740;
+function D(t){
+T("E_m (V)",20,40,24,"#4A5568","left",600);Ln(80,60,80,500,"#94A3B8",2);
+for(const v of [-1.2,-.8,-.4,0,.4]){T((v>0?"+":"")+v.toFixed(1),72,ey(v)+8,24,"#6B7280","right");x.setLineDash([3,8]);Ln(80,ey(v),860,ey(v),"rgba(100,116,139,.2)",1);x.setLineDash([])}
+S.forEach(([n,E,X],i)=>{const k=i<2?"#B45309":i<4?"#0E7490":"#7C3AED";Ln(X-45,ey(E),X+45,ey(E),k,6);if(i==0)T(n+"  +0.45",X+56,ey(E)+8,24,k,"left",600);else{T(n,X,ey(E)-14,24,k,"center",600);T(E.toFixed(2),X,ey(E)+32,24,"#6B7280","center")}});
+x.setLineDash([6,6]);x.beginPath();x.moveTo(240,ey(-1.05)+40);x.quadraticCurveTo(200,ey(0),150,ey(.45)-10);x.strokeStyle="rgba(192,57,43,.55)";x.lineWidth=2;x.stroke();x.setLineDash([]);
+T("recombination",210,ey(-.2),24,"#C0392B","left",600);T("much slower",210,ey(-.2)+28,24,"#C0392B");
+const s=t%9,st=Math.min(Math.floor(s/.8),6),f=Math.min(s/.8-st,1);
+let p;if(st>=6)p=[S[6][2],ey(S[6][1])];else{const A=S[st],B=S[st+1];const X=A[2]+(B[2]-A[2])*f,Y=ey(A[1])+(ey(B[1])-ey(A[1]))*f;p=[X,Y]}
+if(st==0)Ar(S[0][2],ey(.45),S[0][2],ey(.45)+(ey(-1.3)-ey(.45))*f,"#B45309",4);
+C(p[0],p[1],15,"rgba(242,165,65,.4)");C(p[0],p[1],8,"#B45309");
+for(let i=1;i<Math.min(st+1,6);i++){const A=S[i],B=S[i+1];T(TL[i],(A[2]+B[2])/2,(ey(A[1])+ey(B[1]))/2-30,24,"#1A2233","center",600)}
+T(TL[0]+" · 1.77 eV",S[0][2]+14,ey(-.4),24,"#B45309","left",600);
+Ln(110,600,850,600,"#94A3B8",2);[-15,-12,-9,-6,-3].forEach(v=>{Ln(lx(v),594,lx(v),606,"#94A3B8",2);T(["1 fs","1 ps","1 ns","1 µs","1 ms"][[-15,-12,-9,-6,-3].indexOf(v)],lx(v),636,24,"#4A5568","center")});
+const tv=TC[Math.min(st,5)];C(lx(tv),600,9,"#B45309");
+T("stored: P700⁺ → Fd ≈ 0.87 V",500,560,24,"#2F7D4F","left",600);
+}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<div data-build-in="rise 1" style="position:absolute;left:1080px;top:250px;width:656px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#0E7490">Why so many steps?</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">One long tunnel would be slow. Short hops ≤ 14 Å, each with −ΔG° near λ, are fast.</p>
+</div>
+<div data-build-in="rise 2" style="position:absolute;left:1080px;top:486px;width:664px;background:#FBF7EF;border-left:6px solid #B45309;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:2px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">absorbed:   1.77 eV</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">stored:     ≈ 0.87 eV</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#B45309">price of Φ ≈ 1: ~half</p>
+</div>
+<div data-build-in="rise 3" style="position:absolute;left:1080px;top:676px;width:656px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#B45309">Lecture 16 view</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">A₀ mediates between P700* and A₁; each step outruns recombination.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#6B7280">Approximate E_m and lifetimes: Brettel, BBA 1318, 322 (1997); two A₁ → F_X branches: Guergova‑Kuras et al. 2001 · CHM 598 L16</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#6B7280;text-align:right">16</p>
+<aside>[16:30–17:40] This is the PSI energy–kinetic diagram from lecture 16, with approximate potentials from Brettel's review. The photon lifts P700 from about +0.45 V to the excited state near −1.3 V. Then the electron walks down a staircase: to A0, a chlorophyll, in a few picoseconds; to A1, phylloquinone, in about 30; to the iron–sulfur cluster FX in 20 to 200 ns; to FA and FB in under a microsecond; and to ferredoxin in microseconds. Why not one big jump? Dutton's ruler: one long tunnel would be hopelessly slow. Short hops under 14 Å, each with driving force near λ, are fast. A0 is the redox mediator between P700* and A1 that makes this possible, and each step outruns recombination by orders of magnitude. The cost: 1.77 eV absorbed, about 0.87 eV stored between P700+ and ferredoxin. Nature spends about half the energy to buy a quantum yield near one. Can we build something that does the same?</aside>
+</section>

@@ -1,0 +1,49 @@
+<section id="tunnel" data-transition="fade" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#B45309;font-weight:600">Electron tunneling</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#6B7280">absorb → move → <span style="color:#B45309"><b>separate</b></span> → build → search → learn</p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">Tunneling through protein: Dutton’s ruler</h2>
+<x-embed style="position:absolute;left:128px;top:250px;width:900px;height:660px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=900,DH=660;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function C(X,Y,r,k){x.beginPath();x.arc(X,Y,Math.max(r,0),0,6.2832);x.fillStyle=k;x.fill()}
+function Ln(a,b,e,f,k,w){x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.strokeStyle=k;x.lineWidth=w||2;x.stroke()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+const lam=.7,lk=(R,d)=>13-.6*(R-3.6)-3.1*d*d/lam,gx=R=>90+(R-3)/22*610,gy=v=>560-v/13*500;
+const CV=[[0,"#0E7490","ΔG° + λ = 0"],[.4,"#B45309","ΔG° + λ = 0.4 eV"],[.8,"#C0392B","ΔG° + λ = 0.8 eV"]];
+function D(t){
+T("log₁₀ k (s⁻¹)",90,40,24,"#4A5568","left",600);
+x.fillStyle="rgba(14,116,144,.08)";x.fillRect(gx(3),60,gx(14)-gx(3),500);T("≤ 14 Å",gx(8.5),84,24,"#0E7490","center",600);T("natural chains",gx(8.5),112,24,"#0E7490","center");
+[[12,"1 ps"],[9,"1 ns"],[6,"1 µs"],[3,"1 ms"],[0,"1 s"]].forEach(([v,s])=>{x.setLineDash([4,8]);Ln(90,gy(v),700,gy(v),"rgba(100,116,139,.35)",1);x.setLineDash([]);T("τ = "+s,712,gy(v)+8,24,"#4A5568");T(v+"",80,gy(v)+8,24,"#6B7280","right")});
+Ln(90,560,700,560,"#94A3B8",2);Ln(90,60,90,560,"#94A3B8",2);
+for(const R of [5,10,15,20,25])T(R+"",gx(R),592,24,"#4A5568","center");T("edge‑to‑edge R (Å)",395,628,24,"#4A5568","center");
+x.save();x.beginPath();x.rect(90,60,610,500);x.clip();
+CV.forEach(([d,k])=>{x.beginPath();for(let R=3;R<=25;R+=.1){const X=gx(R),Y=gy(lk(R,d));if(R>3)x.lineTo(X,Y);else x.moveTo(X,Y)}x.strokeStyle=k;x.lineWidth=3.5;x.stroke()});
+x.restore();
+const Rm=14-10*Math.cos(t*.5),v=lk(Rm,0);C(gx(Rm),gy(v),16,"rgba(14,116,144,.25)");C(gx(Rm),gy(v),8,"#0E7490");
+const tau=1/Math.pow(10,v),ts=tau<1e-9?(tau*1e12).toFixed(1)+" ps":tau<1e-6?(tau*1e9).toFixed(1)+" ns":tau<1e-3?(tau*1e6).toFixed(1)+" µs":tau<1?(tau*1e3).toFixed(1)+" ms":tau.toFixed(1)+" s";
+x.fillStyle="rgba(255,255,255,.92)";x.fillRect(430,70,260,112);x.strokeStyle="#DDE3EC";x.lineWidth=1;x.strokeRect(430,70,260,112);
+T("R = "+Rm.toFixed(1)+" Å",446,104,26,"#1A2233","left",600);T("log k = "+v.toFixed(1),446,136,24,"#4A5568");T("τ ≈ "+ts,446,166,24,"#0E7490","left",600);
+CV.forEach(([d,k,s],i)=>T(s,446,236+i*32,24,k,"left",600));
+}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<div data-build-in="rise 1" style="position:absolute;left:1080px;top:250px;width:664px;background:#FBF7EF;border-left:6px solid #B45309;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:2px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#1A2233">k_ET = (2π/ħ) |H_AB|² · FC</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#1A2233">|H_AB|² = V₀² e^(−βR), β ≈ 1.4 Å⁻¹</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#B45309">log₁₀k = 13 − 0.6(R − 3.6)</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#B45309">         − 3.1 (ΔG° + λ)²/λ</p>
+</div>
+<div data-build-in="rise 2" style="position:absolute;left:1080px;top:476px;width:656px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#0E7490">Rule of thumb</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">0.6 decade per Å (= β/ln 10): every ~1.7 Å costs 10×. Cofactors sit ≤ 14 Å apart.</p>
+</div>
+<div data-build-in="rise 3" style="position:absolute;left:1080px;top:712px;width:656px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#B45309">Structure matters</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Ru‑labelled proteins: the fold tunes the decay (Gray &amp; Winkler).</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#6B7280">Moser, Page, Farid &amp; Dutton 1995 · Page et al., Nature 402, 47 (1999) · Gray &amp; Winkler 1996 · CHM 598 L16 · λ = 0.7 eV in plot</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#6B7280;text-align:right">14</p>
+<aside>[14:10–15:20] They tunnel. Lecture 16's Fermi golden rule gives k = 2π over ħ times the electronic coupling squared times a Franck–Condon factor. The coupling decays exponentially with distance, with β about 1.4 per ångström in protein. Dutton turned that into a ruler: log10 k equals 13 minus 0.6 times (R minus 3.6), minus 3.1 times (ΔG° + λ) squared over λ, with R the edge-to-edge distance in ångströms and energies in eV. The 0.6 is just β over ln 10, so every 1.7 ångströms costs a factor of ten. On the plot: at 5 Å picoseconds, at 14 Å microseconds, at 25 Å about a second. Natural redox chains keep cofactors within about 14 Å, Page and Dutton's rule. Gray and Winkler, attaching ruthenium complexes to proteins, showed that the fold in between tunes the decay. The second term in the ruler is the energetics, which is Marcus.</aside>
+</section>

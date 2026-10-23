@@ -1,0 +1,58 @@
+<section id="funnel" data-transition="fade" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#B45309;font-weight:600">Antenna proteins</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#6B7280">absorb → <span style="color:#B45309"><b>move</b></span> → separate → build → search → learn</p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">Antenna proteins build an energy funnel</h2>
+<x-embed style="position:absolute;left:128px;top:250px;width:960px;height:660px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=960,DH=660;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function C(X,Y,r,k){x.beginPath();x.arc(X,Y,Math.max(r,0),0,6.2832);x.fillStyle=k;x.fill()}
+function Ln(a,b,e,f,k,w){x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.strokeStyle=k;x.lineWidth=w||2;x.stroke()}
+function Ar(a,b,e,f,k,w){Ln(a,b,e,f,k,w);const g=Math.atan2(f-b,e-a);x.beginPath();x.moveTo(e,f);x.lineTo(e-12*Math.cos(g-.45),f-12*Math.sin(g-.45));x.lineTo(e-12*Math.cos(g+.45),f-12*Math.sin(g+.45));x.closePath();x.fillStyle=k;x.fill()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+const cx=300,cy=340,K8="#0E7490",K5="#2F7D4F",K1="#7C3AED",KR="#B45309";
+const L1=[];for(let i=0;i<32;i++){const a=i/32*6.2832;L1.push([cx+110*Math.cos(a),cy+110*Math.sin(a)])}
+const LH=[];for(let k=0;k<5;k++){const a=k/5*6.2832-1.2,X=cx+228*Math.cos(a),Y=cy+228*Math.sin(a),b5=[],b8=[];for(let i=0;i<18;i++){const q=i/18*6.2832;b5.push([X+33*Math.cos(q),Y+33*Math.sin(q)])}for(let i=0;i<9;i++){const q=i/9*6.2832+.35;b8.push([X+50*Math.cos(q),Y+50*Math.sin(q)])}LH.push({c:[X,Y],a,b5,b8})}
+const near=(P,q)=>{let b=0,d=1e9;P.forEach((p,i)=>{const e=(p[0]-q[0])**2+(p[1]-q[1])**2;if(e<d){d=e;b=i}});return b};
+function path(){const h=LH[Math.random()*5|0],s=h.b8[Math.random()*9|0],j=near(h.b5,s),P=[s];for(let k=0;k<5;k++)P.push(h.b5[(j+k)%18]);const l=near(L1,P[P.length-1]);for(let k=0;k<6;k++)P.push(L1[(l+k*(Math.random()<.5?1:-1)+32)%32]);P.push([cx,cy]);return P}
+const lab=["B800 → B850 · ~0.7 ps","around the B850 ring","LH2 → LH1 · ~3 ps","around the LH1 ring","LH1 → RC · ~35 ps"];
+let X=[],last=-9;
+function D(t){if(t-last>1.6){last=t;X.push({P:path(),t0:t})}X=X.filter(e=>t-e.t0<5);
+LH.forEach(h=>{h.b5.forEach(p=>C(p[0],p[1],5,K5));h.b8.forEach(p=>C(p[0],p[1],5,K8))});
+L1.forEach(p=>C(p[0],p[1],6,K1));C(cx-10,cy,13,KR);C(cx+10,cy,13,KR);
+let cap="";
+X.forEach((e,ix)=>{const s=(t-e.t0)/4.2;if(s>=1){const f=(t-e.t0-4.2)/.8;C(cx,cy,14+40*f,"rgba(180,83,9,"+(.5*(1-f)).toFixed(2)+")");return}
+const n=e.P.length-1,u=s*n,i=Math.min(u|0,n-1),f=u-i,A=e.P[i],B=e.P[i+1],px=A[0]+(B[0]-A[0])*f,py=A[1]+(B[1]-A[1])*f;
+C(px,py,13,"rgba(242,165,65,.35)");C(px,py,7,"#B45309");
+if(ix==X.length-1)cap=lab[i==0?0:i<6?1:i==6?2:i<12?3:4]});
+T(cap,20,30,24,"#1A2233","left",600);
+T("LH2",LH[1].c[0],LH[1].c[1]+8,24,"#4A5568","center",600);T("LH1",cx,cy-60,24,K1,"center",600);T("RC",cx,cy+44,24,KR,"center",700);
+const ey=E=>610-(E-1.38)*2000;T("energy (eV)",650,220,24,"#4A5568","left",600);
+[[1.55,"B800",K8],[1.459,"B850",K5]].forEach(([E,s,k])=>{Ln(650,ey(E),750,ey(E),k,5);T(s,762,ey(E)+8,24,k,"left",600)});
+Ln(650,ey(1.417),750,ey(1.417),K1,5);T("B875 · LH1",650,ey(1.417)+34,24,K1,"left",600);
+Ln(800,ey(1.425),900,ey(1.425),KR,5);T("P870 · RC",900,ey(1.425)-14,24,KR,"right",600);
+Ar(690,ey(1.55)+6,690,ey(1.459)-8,"#4A5568",2);T("0.7 ps",700,(ey(1.55)+ey(1.459))/2+8,24,"#4A5568");
+Ar(690,ey(1.459)+6,690,ey(1.417)-8,"#4A5568",2);T("3 ps",700,(ey(1.459)+ey(1.417))/2+8,24,"#4A5568");
+Ar(752,ey(1.417),798,ey(1.425),"#4A5568",2);T("35 ps (uphill)",760,ey(1.425)-46,24,"#4A5568");
+T("1.55 → 1.42 eV",650,620,24,"#6B7280");T("ΔH paid at each step",650,650,24,"#6B7280");
+}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<div data-build-in="rise 1" style="position:absolute;left:1130px;top:250px;width:606px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#0E7490">Purple bacteria (lecture 15)</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">LH2 rings: 9 αβ pairs, 18 B850 + 9 B800 BChl a, 9 carotenoids. LH2 → LH1 → RC.</p>
+</div>
+<div data-build-in="rise 2" style="position:absolute;left:1130px;top:486px;width:614px;background:#FBF7EF;border-left:6px solid #B45309;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:2px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">D* + A → D + A* + ΔH</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">k_f / k_b = K = e^(ΔE/kT)</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#B45309">B850→B875: 42 meV ≈ 1.6 kT</p>
+</div>
+<div data-build-in="rise 3" style="position:absolute;left:1130px;top:676px;width:606px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#B45309">A funnel, not a cliff</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Heat buys irreversibility. P870 sits slightly uphill of LH1.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#6B7280">McDermott et al., Nature 374, 517 (1995) · times: Sundström, Pullerits &amp; van Grondelle, JPC B 103, 2327 (1999) · CHM 598 L13, L15</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#6B7280;text-align:right">7</p>
+<aside>[6:30–7:50] The clearest example is the purple bacterial membrane from lecture 15. LH2 rings, solved for Rhodopseudomonas acidophila, have nine αβ pairs holding 18 B850 and 9 B800 bacteriochlorophylls plus carotenoids. They surround LH1, a larger ring absorbing at 875 nm, which encircles the reaction centre, P870. Watch an excitation: B800 to B850 in under a picosecond, LH2 to LH1 in a few picoseconds, LH1 to the reaction centre in about 35. Each step goes downhill, from 1.55 toward 1.42 eV. That is lecture 15's equation: D* plus A gives D plus A* plus heat, and the heat is the price of irreversibility. Lecture 13 gives the math: kinetics must collapse to thermodynamics, so k forward over k back equals the equilibrium constant, e to the ΔE over kT. B850 to B875 is about 42 meV, 1.6 kT, so the back rate is about a fifth of the forward rate before degeneracy. And P870 sits slightly above B875: the final trapping step is slightly uphill, paid for by thermal energy. A funnel, not a cliff. How does each hop work?</aside>
+</section>
