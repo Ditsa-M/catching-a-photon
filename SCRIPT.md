@@ -1,8 +1,8 @@
 # Catching a photon: speaker script (≈30 min slot)
 
 Fast pace (~150 words/min). Speaking time is about 22 minutes; with pauses for the animations the talk ends near **25:30**, which leaves about 4 minutes for questions. Each block starts with [start–end] times.
-Total: 3251 words.
 
+Total: 3298 words.
 
 ## 1. Catching a photon before it’s lost
 
@@ -46,7 +46,7 @@ Total: 3251 words.
 
 ## 11. 96 chlorophylls, one reaction centre
 
-[11:00–11:50] Photosystem I puts this together. Each monomer has 12 proteins, 96 chlorophylls and 22 carotenoids, all feeding one trap, P700. The animation is a toy random walk that alternates between a 24-site and a 96-site antenna at the same density. Four times the antenna gives four times the photons, but the walk to the trap gets longer by the factor shown: a real trade-off between collecting light and delivering it. Because each hop is sub-picosecond, even the full antenna finishes in tens of picoseconds, far inside 6 ns. Measured PSI trapping times are 20 to 50 ps. Can we watch it?
+[11:00–11:50] Photosystem I puts this together; on the right is the real thing, Synechocystis PSI from PDB 5OY0, seen from the stroma. Each monomer has 12 proteins, 96 chlorophylls and 22 carotenoids, all feeding one trap, P700. The animation is a toy random walk that alternates between a 24-site and a 96-site antenna at the same density. Four times the antenna gives four times the photons, but the walk to the trap gets longer by the factor shown: a real trade-off between collecting light and delivering it. Because each hop is sub-picosecond, even the full antenna finishes in tens of picoseconds, far inside 6 ns. Measured PSI trapping times are 20 to 50 ps. Can we watch it?
 
 ## 12. Trapping resolved by transient absorption
 
@@ -54,7 +54,7 @@ Total: 3251 words.
 
 ## 13. Reaction centres: a two‑branch cofactor wire
 
-[12:50–14:10] Reaction centres are cofactor wires built in two branches with pseudo-two-fold symmetry. The purple bacterial reaction centre was the first membrane protein structure, by Deisenhofer, Michel and Huber in 1985, Nobel Prize 1988. At the top is the special pair, an excitonically coupled dimer: coupling lowers its excited-state energy so it acts as a trap, lowers its oxidation potential, and spreads the hole over two chlorophylls. In this type II centre the electron uses only one branch: special pair to accessory bacteriochlorophyll to pheophytin in about 3 ps, to quinone QA in about 200 ps, then to QB in about 100 microseconds. The animation then switches to type I, Photosystem I: the acceptors end in iron–sulfur clusters and both branches are active, with A1 to FX taking about 20 ns on one side and 200 ns on the other. Type II centres use quinones, as in purple bacteria and PSII; type I use Fe–S clusters, as in PSI and green sulfur bacteria. So why do electrons move so fast and so selectively through protein?
+[12:50–14:10] Reaction centres are cofactor wires built in two branches with pseudo-two-fold symmetry. The purple bacterial reaction centre was the first membrane protein structure, by Deisenhofer, Michel and Huber in 1985, Nobel Prize 1988. At the top is the special pair, an excitonically coupled dimer: coupling lowers its excited-state energy so it acts as a trap, lowers its oxidation potential, and spreads the hole over two chlorophylls. In this type II centre the electron uses only one branch: special pair to accessory bacteriochlorophyll to pheophytin in about 3 ps, to quinone QA in about 200 ps, then to QB in about 100 microseconds. The animation then switches to type I, Photosystem I: the acceptors end in iron–sulfur clusters and both branches are active, with A1 to FX taking about 20 ns on one side and 200 ns on the other. Type II centres use quinones, as in purple bacteria and PSII; type I use Fe–S clusters, as in PSI and green sulfur bacteria. The picture on the right is the real PSI wire from PDB 5OY0: P700 at the top, two branches of A-1, A0 and A1, meeting at FX above FA and FB. So why do electrons move so fast and so selectively through protein?
 
 ## 14. Tunneling through protein: Dutton’s ruler
 
