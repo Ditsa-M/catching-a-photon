@@ -16,7 +16,7 @@ for i, s in enumerate(d["order"], 1):
     words += len(n.split())
     out += [f"## {i}. {title}", "", n, ""]
 head = ["# Catching a photon: speaker script (≈30 min slot)", "",
-        "Fast pace (~150 words/min). Speaking time is about 22 minutes; with pauses for the animations the talk ends near **25:30**, which leaves about 4 minutes for questions. Each block starts with [start–end] times.",
+        "Story: open with a zoom from a plant down to one π electron (slide 2), then climb back out: excited molecule → pigment pairs → antenna and reaction centre → leaf and artificial leaf. Times assume ~130 words/min; the talk ends near **26:50**, leaving about 3 minutes for questions. Each block starts with [start–end] times.",
         "", f"Total: {words} words.", ""]
 pathlib.Path("SCRIPT.md").write_text("\n".join(head + out))
 print(words, "words")
