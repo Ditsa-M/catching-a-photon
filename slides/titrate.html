@@ -1,0 +1,42 @@
+<section id="titrate" data-transition="fade" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#B45309;font-weight:600">Experimental design</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#6B7280"><span style="color:#2F7D4F;font-weight:600">zoom 1 cm</span> · absorb → funnel → climb → trap → <span style="color:#B45309"><b>poise</b></span> → design</p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">Testing redox control: titrate, freeze, measure, reverse</h2>
+<x-embed style="position:absolute;left:128px;top:250px;width:860px;height:660px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=860,DH=660;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function C(X,Y,r,k){x.beginPath();x.arc(X,Y,Math.max(r,0),0,6.2832);x.fillStyle=k;x.fill()}
+function Ln(a,b,e,f,k,w){x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.strokeStyle=k;x.lineWidth=w||2;x.stroke()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+const sm=k=>{k=Math.min(Math.max(k,0),1);return k*k*(3-2*k)};
+const st=["reductant","measure E_h","freeze 77 K","emission","oxidant"];
+function D(t){const s=t%15,k=Math.min(s/2.6,4.999),i=k|0;
+st.forEach((n,j)=>{const X=90+j*170,on=j<=i;C(X,60,22,on?"#0E7490":"#E2E8F0");T(j+1+"",X,68,22,on?"#FFFFFF":"#6B7280","center",600);T(n,X,112,20,on?"#1A2233":"#94A3B8","center")});
+const red=i<4?Math.min(s/5,1):Math.max(1-(s-10.4)/2,0);
+x.fillStyle="#CBD5E1";x.fillRect(150,170,120,300);x.fillStyle="rgba("+(120-60*red|0)+","+(170-40*red|0)+","+(120+20*red|0)+",.75)";x.fillRect(158,220,104,242);
+T("PSI sample",210,510,24,"#2D3748","center");
+Ln(300,300,380,300,"#94A3B8",3);x.fillStyle="#1A2233";x.fillRect(380,250,150,100);T("ORP",455,290,24,"#FFFFFF","center",600);T((80-640*red).toFixed(0)+" mV",455,330,24,"#F2A541","center",600);
+if(i>=2){const f=Math.min((s-5.2)/1.5,1);x.fillStyle="rgba(186,230,253,"+(.5*f).toFixed(2)+")";x.fillRect(140,160,140,320);T("77 K",210,200,24,"#0E7490","center",600)}
+if(i>=3){x.strokeStyle="#94A3B8";x.lineWidth=2;x.strokeRect(570,200,260,230);const g=(l,c0,w)=>Math.exp(-((l-c0)**2)/(2*w*w));x.beginPath();for(let l=670;l<=800;l+=2){const v=.15*g(l,685,7)+.15*g(l,725,12)+(.2+.6*red)*g(l,760,11),X=570+(l-670)/130*260,Y=420-v*200;if(l==670)x.moveTo(X,Y);else x.lineTo(X,Y)}x.strokeStyle="#B45309";x.lineWidth=3;x.stroke();T("emission (schematic)",700,460,22,"#6B7280","center")}
+T(i<4?"reducing…":"back-titrating with oxidant",430,600,26,"#B91C1C","center",600);
+}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<div data-build-in="rise 1" style="position:absolute;left:1040px;top:250px;width:696px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#0E7490">The protocol</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Add a reductant (dithionite) in steps, measure the potential, freeze each sample to 77 K and record its emission. Then add an oxidant (ferricyanide).</p>
+</div>
+<div data-build-in="rise 2" style="position:absolute;left:1040px;top:486px;width:696px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#B45309">Reading the result</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">A change that reverses with oxidant means redox control. A change that does not reverse means the protein was damaged.</p>
+</div>
+<div data-build-in="rise 3" style="position:absolute;left:1040px;top:704px;width:696px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#2F7D4F">Good practice</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Measure E_h in the sample itself, add redox mediators so it equilibrates, and dark-adapt before freezing.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#6B7280">Schematic of the experimental approach, no measured data shown · Mayhew 1978 · Karapetyan et al. 1999</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#6B7280;text-align:right">19</p>
+<aside>[19:58–21:14] How would you test this? Here's the experimental approach, shown as a schematic, not data. Add a reductant such as dithionite in steps, measure the potential in the sample, freeze each sample to 77 K and record its emission, focusing on the red band. Then add an oxidant such as ferricyanide. The reversal is the critical control: if the spectrum returns, the change came from redox state; if it doesn't, the protein was damaged. Good practice is to measure the potential in the sample itself, use redox mediators so the cofactors equilibrate with the solution, and dark-adapt before freezing so light doesn't set the redox state for you. Each sample gives one point: a measured potential and a red-band intensity. Plotted together, those points form a titration curve. If a curve like that fits a Nernst equation, its midpoint tells you which cofactor is in control. Without mediators and an in-sample potential measurement, you can still see a trend, but you can't assign a midpoint.</aside>
+</section>

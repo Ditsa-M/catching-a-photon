@@ -1,0 +1,41 @@
+<section id="fates" data-transition="fade" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#B45309;font-weight:600">The question</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#6B7280"><span style="color:#2F7D4F;font-weight:600">zoom 1 nm</span> · <span style="color:#B45309"><b>absorb</b></span> → funnel → climb → trap → poise → design</p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">Three fates for one absorbed photon</h2>
+<x-embed style="position:absolute;left:128px;top:250px;width:860px;height:660px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=860,DH=660;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function C(X,Y,r,k){x.beginPath();x.arc(X,Y,Math.max(r,0),0,6.2832);x.fillStyle=k;x.fill()}
+function Ln(a,b,e,f,k,w){x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.strokeStyle=k;x.lineWidth=w||2;x.stroke()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+const sm=k=>{k=Math.min(Math.max(k,0),1);return k*k*(3-2*k)};
+const F=[["charge separation","#0E7490"],["heat","#94A3B8"],["fluorescence","#B45309"]];
+const OPEN=[.97,.02,.01],SHUT=[0,.8,.2];let cnt=[0,0,0],mode=-1,P=[],last=0;
+function D(t){const m=(t%20)<10?0:1;if(m!=mode){mode=m;cnt=[0,0,0];P=[]}
+const pr=m?SHUT:OPEN;
+if(t-last>.25){last=t;const r=Math.random();const f=r<pr[0]?0:r<pr[0]+pr[1]?1:2;P.push({t0:t,f,y:120+Math.random()*200})}
+T(m?"reaction centre closed":"reaction centre open",430,40,30,m?"#B91C1C":"#0E7490","center",600);
+C(120,230,46,"#E8F1E9");C(120,230,22,"#2F7D4F");T("Chl*",120,310,24,"#2F7D4F","center",600);
+const ends=[[600,120],[600,230],[600,340]];
+ends.forEach((e,i)=>{Ln(170,230,e[0]-40,e[1],"rgba(148,163,184,.5)",2);C(e[0],e[1],28,F[i][1]);T(F[i][0],e[0]+44,e[1]+8,24,"#2D3748")});
+P=P.filter(p=>t-p.t0<1.2);for(const p of P){const k=sm((t-p.t0)/1),e=ends[p.f];C(170+(e[0]-40-170)*k,230+(e[1]-230)*k,8,F[p.f][1]);if(t-p.t0>1&&!p.c){p.c=1;cnt[p.f]++}}
+const tot=Math.max(cnt[0]+cnt[1]+cnt[2],1);T("photons counted: "+tot,40,450,24,"#6B7280");
+F.forEach((f,i)=>{const y=480+i*52,w=cnt[i]/tot*560;x.fillStyle=f[1];x.fillRect(220,y,Math.max(w,2),34);T(f[0],210,y+26,24,"#2D3748","right");T((cnt[i]/tot*100).toFixed(0)+" %",230+w,y+26,24,"#1A2233","left",600)});
+}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<div data-build-in="rise 1" style="position:absolute;left:1040px;top:250px;width:696px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#0E7490">Branching ratios</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Every absorbed photon ends in exactly one fate. Its yield is its rate divided by the sum of all rates.</p>
+</div>
+<div data-build-in="rise 2" style="position:absolute;left:1040px;top:486px;width:704px;background:#FBF7EF;border-left:6px solid #B45309;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:2px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">Φᵢ = kᵢ / Σⱼ kⱼ</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#B45309">open PSI: Φ_CS ≈ 0.97–0.99</p></div>
+<div data-build-in="rise 3" style="position:absolute;left:1040px;top:630px;width:696px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#B45309">Today’s question</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">If the protein’s redox state changes one rate, where does the photon’s energy go instead?</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#6B7280">Trapping yield of PSI: Gobets &amp; van Grondelle, BBA 1507, 80 (2001) · CHM 598 L13, L16 · the closed-centre split is illustrative</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#6B7280;text-align:right">3</p>
+<aside>[2:10–3:50] Every absorbed photon ends in exactly one fate. In this picture there are three: charge separation, heat, or fluorescence. The yield of each is its rate divided by the sum of all the rates, the rate competition from lectures 13 and 16. In an open Photosystem I, charge separation wins almost every time, with a trapping yield of 97 to 99 percent. Now watch the counters when the animation switches to a closed reaction centre. Charge separation drops to zero and the same photons are shared between heat and fluorescence. The split shown for the closed case is illustrative. That's the question of this talk: if the protein's redox state changes one rate, where does the energy go instead? To answer it we need the photophysics, so let's start with the photon itself. A quick worked example so the equation feels concrete. Suppose charge separation takes 30 ps, so its rate is about 3 × 10^10 per second, and all the losses together take 6 ns, about 1.7 × 10^8 per second. Then the charge-separation yield is 3 × 10^10 over 3.02 × 10^10, about 99.4 percent. Remove the charge-separation channel and the losses are all that is left, so they now take 100 percent of the photons. Nothing about the pigments changed; only one rate did.</aside>
+</section>

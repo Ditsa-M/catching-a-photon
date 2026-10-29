@@ -1,0 +1,39 @@
+<section id="poise" data-transition="fade" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#B45309;font-weight:600">Redox poising</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#6B7280"><span style="color:#2F7D4F;font-weight:600">zoom 3 nm</span> · absorb → funnel → climb → trap → <span style="color:#B45309"><b>poise</b></span> → design</p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">Solution potential sets which cofactors are reduced</h2>
+<x-embed style="position:absolute;left:128px;top:250px;width:860px;height:660px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=860,DH=660;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function C(X,Y,r,k){x.beginPath();x.arc(X,Y,Math.max(r,0),0,6.2832);x.fillStyle=k;x.fill()}
+function Ln(a,b,e,f,k,w){x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.strokeStyle=k;x.lineWidth=w||2;x.stroke()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+const sm=k=>{k=Math.min(Math.max(k,0),1);return k*k*(3-2*k)};
+const Co=[["P700⁺/P700",.43],["F_A",-.52],["F_B",-.58],["dithionite (pH 7)",-.66],["F_X",-.70],["A₁",-.80],["A₀",-1.05]],F=96485,RT=8.314*295;
+const yy=e=>60+(.55-e)/1.7*560;
+function D(t){const Eh=.45-((Math.sin(t*.35-1.2)+1)/2)*1.15;
+Ln(140,yy(.55),140,yy(-1.15),"#94A3B8",2);for(const e of [.2,-.2,-1])T(e.toFixed(1)+" V",128,yy(e)+8,24,"#6B7280","right");for(const [n,e] of [["Fe(CN)₆³⁻",.36],["S₂O₄²⁻",-.66]]){Ln(140,yy(e),850,yy(e),"rgba(185,28,28,.45)",2);T(n,128,yy(e)+8,22,"#B91C1C","right",600)}
+x.fillStyle="rgba(14,116,144,.08)";x.fillRect(150,yy(Eh),700,yy(-1.15)-yy(Eh));
+Ln(150,yy(Eh),850,yy(Eh),"#0E7490",3);T("solution E_h = "+Eh.toFixed(2)+" V",840,yy(Eh)-12,24,"#0E7490","right",600);
+Co.forEach(([n,e],i)=>{const red=1/(1+Math.exp(F*(Eh-e)/RT)),X=[200,200,470,0,200,470,200][i],Y=yy(e);
+if(n.startsWith("dithionite"))return;
+C(X,Y,16,"#E2E8F0");x.beginPath();x.arc(X,Y,16,-1.5708,-1.5708+6.2832*red);x.lineTo(X,Y);x.fillStyle=i?"#2F7D4F":"#B45309";x.fill();
+T(n+"  "+e.toFixed(2)+" V · "+(red*100).toFixed(0)+"% red.",X+28,Y+8,22,"#1A2233")});
+}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<div data-build-in="rise 1" style="position:absolute;left:1040px;top:250px;width:696px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#0E7490">Nernst on every cofactor</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Each cofactor is reduced or oxidised according to how the solution potential compares with its midpoint.</p>
+</div>
+<div data-build-in="rise 2" style="position:absolute;left:1040px;top:460px;width:704px;background:#FBF7EF;border-left:6px solid #B45309;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:2px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#1A2233">f_red = 1 / (1 + e^(nF(E_h − E_m)/RT))</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#B45309">ferricyanide ≈ +0.36 V · dithionite ≈ −0.66 V</p></div>
+<div data-build-in="rise 3" style="position:absolute;left:1040px;top:604px;width:696px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#B91C1C">Open or closed</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Oxidise P700 and the trap becomes a quencher. Reduce F_A/F_B and electrons cannot leave, so charge pairs recombine. Either way the photon’s energy is redistributed.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#6B7280">Midpoints: Brettel, BBA 1318, 322 (1997) · dithionite: Mayhew, Eur. J. Biochem. 85, 535 (1978), depends on pH and concentration · CHM 598 L13 (equilibrium)</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#6B7280;text-align:right">18</p>
+<aside>[18:28–19:58] This is what I mean by redox poising. Every cofactor obeys the Nernst equation: its fraction reduced depends on the solution potential compared with its midpoint. The animation sweeps the solution potential from oxidising to reducing. At the top, ferricyanide, about +0.36 V, can start to oxidise P700, and P700+ is a quencher. Going down, dithionite, about −0.66 V at pH 7, reduces FA and FB, and partly FX. Now an electron that reaches A1 can't move on, so the charge pair recombines. Either way the reaction centre is closed, and the photon's energy must go somewhere else. Note that the dithionite potential depends on pH and concentration, so the potential has to be measured, not assumed. A worked Nernst example: for a one-electron cofactor at room temperature, each 59 mV of potential changes the ratio of reduced to oxidised by a factor of ten. So a solution potential 120 mV below a cofactor's midpoint leaves it about 99 percent reduced, and 120 mV above leaves it about 99 percent oxidised. F_A at −0.52 V is mostly reduced near −0.64 V; F_X at −0.70 V is still mostly oxidised there. That's why the exact potential matters.</aside>
+</section>

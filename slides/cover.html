@@ -1,9 +1,9 @@
 <section id="cover" data-transition="fade" style="background:radial-gradient(circle at 75% 45%, #EEF4FB 0%, #FFFFFF 62%);color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column">
 <p style="position:absolute;left:128px;top:150px;width:900px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#B45309;font-weight:600">CHM 598 · Introduction to Photochemistry</p>
-<h1 data-build-in="rise 1 auto" style="position:absolute;left:128px;top:206px;width:900px;font-family:'Space Grotesk', Arial, sans-serif;font-size:96px;font-weight:700;line-height:1.05;color:#1A2233">Catching a photon before it’s lost</h1>
-<p data-build-in="fade 2 auto" style="position:absolute;left:128px;top:450px;width:880px;font-size:36px;line-height:1.3;color:#4A5568">How antenna proteins and reaction centres win a race against time, and how AI is learning the same rules to design photocatalysts</p>
-<p data-build-in="fade 3 auto" style="position:absolute;left:128px;top:660px;width:860px;font-size:30px;line-height:1.35;color:#B45309">An excited molecule gets about 6 nanoseconds. This talk is about what happens inside that window.</p>
-<p data-build-in="fade 4 auto" style="position:absolute;left:128px;top:850px;width:900px;font-size:28px;color:#1A2233"><b>Ditsa Mallick</b> · [presentation date]</p>
+<h1 data-build-in="rise 1 auto" style="position:absolute;left:128px;top:206px;width:900px;font-family:'Space Grotesk', Arial, sans-serif;font-size:88px;font-weight:700;line-height:1.05;color:#1A2233">Light, redox and energy flow in Photosystem I</h1>
+<p data-build-in="fade 2 auto" style="position:absolute;left:128px;top:520px;width:880px;font-size:36px;line-height:1.3;color:#4A5568">How the protein’s redox state decides where an absorbed photon’s energy goes</p>
+<p data-build-in="fade 3 auto" style="position:absolute;left:128px;top:680px;width:860px;font-size:30px;line-height:1.35;color:#B45309">An excited chlorophyll has about 6 ns. An open reaction centre uses it in about 30 ps. A closed one does not.</p>
+<p data-build-in="fade 4 auto" style="position:absolute;left:128px;top:870px;width:900px;font-size:28px;color:#1A2233"><b>Ditsa Mallick</b> · [presentation date]</p>
 <x-embed style="position:absolute;left:1060px;top:150px;width:740px;height:780px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
 const DW=740,DH=780;
 const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
@@ -12,26 +12,22 @@ function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAli
 function C(X,Y,r,k){x.beginPath();x.arc(X,Y,Math.max(r,0),0,6.2832);x.fillStyle=k;x.fill()}
 function Ln(a,b,e,f,k,w){x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.strokeStyle=k;x.lineWidth=w||2;x.stroke()}
 function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
-const N=[];for(let r=0;r<4;r++){const n=r?r*6:1;for(let i=0;i<n;i++){const a=i/n*6.2832+r*.4;N.push([200+Math.cos(a)*r*60,380+Math.sin(a)*r*60])}}
-const M=[[4,460],[5,580],[3,690]].map(([n,X])=>{const a=[];for(let i=0;i<n;i++)a.push([X,380+(i-(n-1)/2)*92]);return a});
+const sm=k=>{k=Math.min(Math.max(k,0),1);return k*k*(3-2*k)};
+const N=[];for(let r=0;r<5;r++){const n=r?r*7:1;for(let i=0;i<n;i++){const a=i/n*6.2832+r*.5;N.push([370+Math.cos(a)*r*62,360+Math.sin(a)*r*62,r==4&&i%7==3])}}
 let P=[],last=-9;
-function D(t){
-if(t-last>.55){last=t;P.push({n:1+Math.floor(Math.random()*(N.length-1)),t0:t,r:[Math.random()*4|0,Math.random()*5|0,Math.random()*3|0]})}
-for(let i=0;i<N.length;i++)for(let j=i+1;j<N.length;j++){const dx=N[i][0]-N[j][0],dy=N[i][1]-N[j][1];if(dx*dx+dy*dy<5200)Ln(N[i][0],N[i][1],N[j][0],N[j][1],"rgba(47,125,79,.28)",1.5)}
-M[0].forEach(b=>Ln(N[0][0],N[0][1],b[0],b[1],"rgba(14,116,144,.16)",1.5));
-for(let k=0;k<2;k++)M[k].forEach(a=>M[k+1].forEach(b=>Ln(a[0],a[1],b[0],b[1],"rgba(14,116,144,.2)",1.5)));
-N.forEach((p,i)=>C(p[0],p[1],i?9:16,i?"#2F7D4F":"#B45309"));
-M.forEach(a=>a.forEach(p=>{C(p[0],p[1],13,"#CFE3EA");C(p[0],p[1],7,"#0E7490")}));
-P=P.filter(p=>t-p.t0<3.4);
-for(const p of P){const s=t-p.t0,q=N[p.n],o=N[0];
-if(s<.9){const k=s/.9,hx=q[0]-.57*300*(1-k),hy=q[1]-.82*300*(1-k);x.beginPath();for(let u=0;u<=1.001;u+=.04){const w=Math.sin(u*28-s*24)*9,X=hx-.57*110*u-.82*w,Y=hy-.82*110*u+.57*w;if(u)x.lineTo(X,Y);else x.moveTo(X,Y)}x.strokeStyle="#B45309";x.lineWidth=3;x.stroke()}
-else if(s<1.7){let k=(s-.9)/.8;k=k*k*(3-2*k);const X=q[0]+(o[0]-q[0])*k,Y=q[1]+(o[1]-q[1])*k;C(X,Y,24,"rgba(14,116,144,.25)");C(X,Y,10,"#1A2233")}
-else if(s<2.1){const k=(s-1.7)/.4;C(o[0],o[1],16+34*k,"rgba(242,165,65,"+(.6*(1-k)).toFixed(2)+")")}
-else{const k=Math.min((s-2.1)/1.3*3,2.999),i=k|0,f=k-i,A=i?M[i-1][p.r[i-1]]:o,B=M[i][p.r[i]];C(A[0]+(B[0]-A[0])*f,A[1]+(B[1]-A[1])*f,8,"#0E7490");C(B[0],B[1],13*f,"rgba(14,116,144,.5)")}}
-T("photosynthesis",200,660,26,"#4A5568","center");T("machine learning",580,660,26,"#4A5568","center");
-C(70,738,8,"#B45309");T("photon",86,746,24,"#4A5568");C(250,738,8,"#1A2233");T("excitation",266,746,24,"#4A5568");C(450,738,8,"#0E7490");T("prediction",466,746,24,"#4A5568");
+function D(t){const cyc=t%16,open=cyc<8;
+if(t-last>.6){last=t;let n;do{n=1+Math.floor(Math.random()*(N.length-1))}while(N[n][2]);P.push({n,t0:t,path:[n],end:Math.random()})}
+for(let i=0;i<N.length;i++)for(let j=i+1;j<N.length;j++){const dx=N[i][0]-N[j][0],dy=N[i][1]-N[j][1];if(dx*dx+dy*dy<5600)Ln(N[i][0],N[i][1],N[j][0],N[j][1],"rgba(47,125,79,.25)",1.5)}
+N.forEach((p,i)=>C(p[0],p[1],i?(p[2]?11:9):18,i?(p[2]?"#B91C1C":"#2F7D4F"):(open?"#0E7490":"#94A3B8")));
+P=P.filter(p=>t-p.t0<2.6);
+for(const p of P){const s=t-p.t0,q=N[p.n];
+if(s<.6){const k=s/.6;C(q[0],q[1],30*(1-k)+4,"rgba(242,165,65,"+(1-k).toFixed(2)+")")}
+else if(s<1.6){const red=N.findIndex(z=>z[2]&&Math.hypot(z[0]-q[0],z[1]-q[1])<200),goal=open?N[0]:(red>0?N[red]:N[0]),k=sm((s-.6)/1);C(q[0]+(goal[0]-q[0])*k,q[1]+(goal[1]-q[1])*k,10,"#1A2233")}
+else{const k=(s-1.6)/1;if(open)C(N[0][0],N[0][1],18+40*k,"rgba(14,116,144,"+(.5*(1-k)).toFixed(2)+")");else{const red=N.findIndex(z=>z[2]&&Math.hypot(z[0]-q[0],z[1]-q[1])<200),z=red>0?N[red]:N[0];C(z[0],z[1],12+30*k,"rgba(185,28,28,"+(.5*(1-k)).toFixed(2)+")")}}}
+T(open?"reaction centre open: energy becomes charge":"reaction centre closed: energy waits, or leaves as red light",370,700,26,open?"#0E7490":"#B91C1C","center",600);
+C(120,750,8,"#2F7D4F");T("chlorophyll",136,758,24,"#4A5568");C(310,750,9,"#B91C1C");T("red chlorophyll",326,758,24,"#4A5568");C(540,750,10,"#0E7490");T("P700",556,758,24,"#4A5568");
 }
 onresize=R;R();requestAnimationFrame(L);
 </script></x-embed>
-<aside>[0:00–0:38] An excited molecule has about six nanoseconds before its energy is lost as heat or light. Today I follow one photon through that window. We start where photosynthesis starts, with a plant, and zoom in until we reach a single electron. Then we climb back out one level at a time: the excited molecule, the antenna proteins that move its energy, the reaction centre that turns it into charge, and finally the artificial leaf, and how machine learning is helping to design one.</aside>
+<aside>[0:00–1:06] An excited chlorophyll has about six nanoseconds before its energy is lost as heat or light. In Photosystem I it rarely gets that far: an open reaction centre uses the energy in about thirty picoseconds. Today's question is what happens when the reaction centre is not open. I'll argue that the redox state of the protein, which cofactors carry an extra electron, decides where an absorbed photon's energy ends up. Watch the animation: when the centre is open, excitations go to P700 and become charge; when it is closed, the energy waits, and some of it leaves as red light. The plan has six steps, shown in the tracker at the top right of every slide: absorb, funnel, climb, trap, poise and design. The first four are the photophysics from this course; the last two apply it to one question about redox control.</aside>
 </section>

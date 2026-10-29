@@ -1,57 +1,55 @@
-# Catching a photon before it's lost
+# Light, redox and energy flow in Photosystem I
 
-**From photosynthetic light harvesting to machine-learning-designed photocatalysts**
+**How the protein's redox state decides where an absorbed photon's energy goes**
 Ditsa Mallick · CHM 598, Introduction to Photochemistry
 
-An excited molecule has about 6 ns before its energy is lost. This 28-slide, 30-minute talk follows that energy through the chain *absorb → move → separate → build → search → learn*:
+One absorbed photon can become charge, heat or light. This 26-slide, 30-minute talk follows it through *absorb → funnel → climb → trap → poise → design* and asks how opening or closing the reaction centre, by changing its redox state, changes which fate wins.
 
-| # | Slide | Topic |
-|---|---|---|
-| 1 | Cover | |
-| 2 | Energetics | Solar flux, photon energy, why one photon cannot split water |
-| 3 | Photochemistry vs thermal chemistry | Woodward–Hoffmann con/disrotation, excited-state redox (lecture 14) |
-| 4 | Franck–Condon principle | Vertical transitions, vibronic progression, Huang–Rhys factor |
-| 5 | Excited-state kinetics | Jablonski diagram, Kasha's rule, Gouterman model, Φ_F and k_r |
-| 6 | Light harvesting | ~10 photons s⁻¹ per chlorophyll, why antennas exist |
-| 7 | Antenna proteins | Purple bacterial LH2 → LH1 → RC funnel, detailed balance |
-| 8 | Excitonic coupling | Dipole–dipole coupling, J/H aggregates |
-| 9 | Energy-transfer kinetics | Förster theory, coherent vs incoherent transfer, trapping yield |
-| 10 | Energy-transfer mechanisms | Förster vs Dexter, triplet transfer and carotenoid photoprotection |
-| 11 | Photosystem I | Random walk of excitations to P700 (toy model) |
-| 12 | Ultrafast spectroscopy | Transient absorption and global analysis (schematic) |
-| 13 | Reaction centres | Type II vs type I, special pair, one vs two active branches |
-| 14 | Electron tunneling | Fermi golden rule, β ≈ 1.4 Å⁻¹, Dutton's ruler |
-| 15 | Charge separation | Eyring, Marcus theory, inverted region |
-| 16 | PSI electron staircase | Energy–kinetic diagram P700* → A₀ → A₁ → F_X → F_A/F_B → Fd |
-| 17 | Artificial photosynthesis | Design principles and the efficiency gap |
-| 18 | Field overview | Timeline and OpenAlex publication counts |
-| 19–23 | Machine learning | Screening, descriptors, closed-loop discovery, small-data learning, ML potentials |
-| 24 | Summary | Conclusions |
-| 25 | Thank you | Closing slide with animated wordmark |
-| 26–28 | References | |
+| # | Slide |
+|---|---|
+| 1 | Light, redox and energy flow in Photosystem I |
+| 2 | From a leaf to one electron: nine levels of zoom |
+| 3 | Three fates for one absorbed photon |
+| 4 | Sunlight is abundant, but each photon is weak |
+| 5 | The excited state lives for nanoseconds |
+| 6 | Electrons jump, nuclei wait: Franck–Condon |
+| 7 | A lone chlorophyll absorbs ~10 photons per second |
+| 8 | Excitonic coupling between neighbouring pigments |
+| 9 | Transfer outcompetes excited‑state decay |
+| 10 | 96 chlorophylls, one reaction centre |
+| 11 | Some chlorophylls sit below the trap |
+| 12 | At 77 K, red emission reports where the energy is stuck |
+| 13 | Trapping resolved by transient absorption |
+| 14 | Reaction centres: a two‑branch cofactor wire |
+| 15 | Tunneling through protein: Dutton’s ruler |
+| 16 | Charge separation and Marcus theory |
+| 17 | Photosystem I’s electron staircase |
+| 18 | Solution potential sets which cofactors are reduced |
+| 19 | Testing redox control: titrate, freeze, measure, reverse |
+| 20 | Closing the trap redistributes the photon |
+| 21 | Next: tuning a single red-chlorophyll site |
+| 22 | Design principles and the efficiency gap |
+| 23 | Conclusions: the trap’s redox state steers the photon |
+| 24 | thank‑you/ |
+| 25 | Light, excited states and photosynthesis |
+| 26 | Photosystem I, red chlorophylls, redox and solar fuels |
 
-Every slide has a live canvas animation, worked equations, citations and speaker notes.
+The earlier version of this deck (PSI photophysics + machine learning for photocatalysts) is kept as git tag `v1-catching-a-photon`.
 
 ## Viewing
 
-Open `index.html` in a browser (or the GitHub Pages site for this repo).
+Open `index.html` in a browser. **← / →** or **Space** change slide, **N** shows speaker notes, **F** goes full screen, and `index.html#7` jumps to slide 7.
 
-- **← / →** or **Space**: change slide
-- **N**: show speaker notes
-- **F**: full screen
-- `index.html#7` jumps to slide 7
+## Building
 
-## Files
-
-- `slides/*.html`: one 1920×1080 slide per file, with inline styles; animations live in `<x-embed>` blocks.
-- `deck.json`: slide order and fonts.
-- `SCRIPT.md`: the full timed speaker script (also shown with **N** in the player).
-- `assets/`: PSI structure renders made in ChimeraX from the public PDB entry 5OY0 (Malavath et al. 2018); `scripts/` holds the render scripts.
-- `build.py`: regenerates `index.html` from the slides (`python3 build.py`).
+```
+python3 scripts/redox_slides.py   # writes the new slides
+python3 scripts/notes_redox.py    # order, breadcrumbs, page numbers, timed notes, SCRIPT.md
+python3 build.py                  # index.html
+```
 
 ## Notes on the content
 
-- Data come only from published work; the full references are on slides 26–28.
-- These animations are schematic teaching models, not measured data, and their slides say so: the TA traces and map, the PSI random walk, the Bayesian-optimisation curve and the basin-hopping landscape.
-- The Sn₃O₄ "≈16×" H₂ enhancement comes from the institute's press release. Check it against the JACS paper's conditions before quoting it.
-- Publication counts are from an OpenAlex title/abstract query retrieved on 18 Oct 2026.
+- Only published work is cited; the references are on the last two slides.
+- The animations are schematic teaching models, not measured data, and each slide says so. The experimental-design (slide 19) and single-site (slide 21) slides show an approach and a hypothesis only, with no data.
+- The dithionite potential (≈ −0.66 V at pH 7) depends on pH and concentration (Mayhew 1978).
