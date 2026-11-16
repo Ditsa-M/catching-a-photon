@@ -1,0 +1,41 @@
+<section id="redpools" data-transition="fade" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#B45309;font-weight:600">Red chlorophylls: the evidence</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#6B7280"><span style="color:#2F7D4F;font-weight:600">zoom 15 nm</span> · absorb → funnel → <span style="color:#B45309"><b>climb</b></span> → trap → poise → design</p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">Red pools slow trapping; cold exposes them</h2>
+<x-embed style="position:absolute;left:128px;top:250px;width:880px;height:660px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=880,DH=660;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function C(X,Y,r,k){x.beginPath();x.arc(X,Y,Math.max(r,0),0,6.2832);x.fillStyle=k;x.fill()}
+function Ln(a,b,e,f,k,w){x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.strokeStyle=k;x.lineWidth=w||2;x.stroke()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+const sm=k=>{k=Math.min(Math.max(k,0),1);return k*k*(3-2*k)};
+const V=[[81,103],[115,458]],G=["280 K","170 K"],K=["#2F7D4F","#B45309"];
+function D(t){const s=t%12;
+T("Overall trapping time (ps) vs emission wavelength",20,40,28,"#1A2233","left",600);
+Ln(80,540,860,540,"#94A3B8",2);
+for(let j=0;j<2;j++){const X0=140+j*380;T(G[j],X0+130,610,28,"#1A2233","center",600);
+for(let i=0;i<2;i++){const v=V[j][i],g=sm((s-j*1.2-i*.4)/2),h=v/458*330*g,X=X0+i*150;x.fillStyle=K[i];x.fillRect(X,540-h,110,h);
+if(g>.02)T(Math.round(v*g)+" ps",X+55,528-h,26,"#1A2233","center",600);T(i?"770 nm":"690 nm",X+55,572,22,"#4A5568","center")}}
+const a=sm(s-4.5);x.globalAlpha=a;T("red emission: ×1.3 slower at 280 K, ×4 at 170 K",470,100,24,"#B45309","center",600);
+T("Arrhenius: Eₐ ≈ 1.35–2.7 kcal/mol ≈ 60–120 meV",470,136,24,"#4A5568","center");x.globalAlpha=1;
+T("Data: Jennings et al. 2003, plant PSI–LHCI",20,650,22,"#6B7280")}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<div data-build-in="rise 1" style="position:absolute;left:1040px;top:250px;width:696px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#0E7490">Same rules, three species</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Five cyanobacterial PSI cores trap in 23–50 ps. Red‑Chl content alone explains the spread.</p>
+</div>
+<div data-build-in="rise 2" style="position:absolute;left:1040px;top:474px;width:696px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#B45309">Cold strands energy</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">At 295 K, light up to 750 nm oxidises P700 equally well. At 5 K only about half the excitations reach P700.</p>
+</div>
+<div data-build-in="rise 3" style="position:absolute;left:1040px;top:698px;width:696px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#2F7D4F">Plants and models agree</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Red forms in LHCI slow trapping about twofold. Models of all 96 Chls reproduce PSI’s spectra and lifetimes.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#6B7280">Gobets et al., Biophys. J. 81, 407 (2001) · Pålsson et al., Biophys. J. 74, 2611 (1998) · Jennings et al., BBA 1557, 91 (2003) · Wientjes et al., Biophys. J. 101, 745 (2011) · Byrdin et al., Biophys. J. 83, 433 (2002) · Sener et al., JPCB 106, 7948 (2002)</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#6B7280;text-align:right">13</p>
+<aside>[13:34–14:16] Here are the measurements behind that picture. Across five cyanobacterial PSI cores, trapping takes 23 to 50 ps, and red-chlorophyll content alone explains the spread. At room temperature even 750 nm light oxidises P700 as well as bulk light; at 5 K only about half the excitations get there. The chart is plant PSI–LHCI: red emission is trapped four times more slowly at 170 K, with activation energies of 60 to 120 meV, the size of the gap on the previous diagram. Structure-based models of all 96 chlorophylls reproduce these numbers.</aside>
+</section>

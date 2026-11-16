@@ -238,13 +238,84 @@ const i=Math.floor(p),f=sm(p-i),j=Math.min(i+1,St.length-1),A=[140+i*164,200+(i%
 </section>
 """
 
+# ---------------------------------------------------------------- redpools (published kinetics of red chlorophylls)
+S["redpools"] = slide("redpools", "Red chlorophylls: the evidence", "climb", "15 nm", "Red pools slow trapping; cold exposes them", embed(128, 250, 880, 660, '''
+const V=[[81,103],[115,458]],G=["280 K","170 K"],K=["#2F7D4F","#B45309"];
+function D(t){const s=t%12;
+T("Overall trapping time (ps) vs emission wavelength",20,40,28,"#1A2233","left",600);
+Ln(80,540,860,540,"#94A3B8",2);
+for(let j=0;j<2;j++){const X0=140+j*380;T(G[j],X0+130,610,28,"#1A2233","center",600);
+for(let i=0;i<2;i++){const v=V[j][i],g=sm((s-j*1.2-i*.4)/2),h=v/458*330*g,X=X0+i*150;x.fillStyle=K[i];x.fillRect(X,540-h,110,h);
+if(g>.02)T(Math.round(v*g)+" ps",X+55,528-h,26,"#1A2233","center",600);T(i?"770 nm":"690 nm",X+55,572,22,"#4A5568","center")}}
+const a=sm(s-4.5);x.globalAlpha=a;T("red emission: ×1.3 slower at 280 K, ×4 at 170 K",470,100,24,"#B45309","center",600);
+T("Arrhenius: Eₐ ≈ 1.35–2.7 kcal/mol ≈ 60–120 meV",470,136,24,"#4A5568","center");x.globalAlpha=1;
+T("Data: Jennings et al. 2003, plant PSI–LHCI",20,650,22,"#6B7280")}'''), "\n".join([
+    card(250, "Same rules, three species", "Five cyanobacterial PSI cores trap in 23–50 ps. Red‑Chl content alone explains the spread.", "#0E7490", 1),
+    card(474, "Cold strands energy", "At 295 K, light up to 750 nm oxidises P700 equally well. At 5 K only about half the excitations reach P700.", "#B45309", 2),
+    card(698, "Plants and models agree", "Red forms in LHCI slow trapping about twofold. Models of all 96 Chls reproduce PSI’s spectra and lifetimes.", "#2F7D4F", 3),
+]), "Gobets et al., Biophys. J. 81, 407 (2001) · Pålsson et al., Biophys. J. 74, 2611 (1998) · Jennings et al., BBA 1557, 91 (2003) · Wientjes et al., Biophys. J. 101, 745 (2011) · Byrdin et al., Biophys. J. 83, 433 (2002) · Sener et al., JPCB 106, 7948 (2002)")
 
-def refs(sid, n, title, items):
+# ---------------------------------------------------------------- firstps (ultrafast reaction-centre steps)
+S["firstps"] = slide("firstps", "Reaction-centre kinetics", "trap", "5 nm", "The first picoseconds, measured", embed(128, 250, 880, 660, '''
+const X=s=>60+(Math.log10(s)+13)*111.4,Y0=330;
+const E=[[1.8e-13,"P700⁺A₀⁻ < 0.18 ps","far-red pump","#0E7490",-1,250],[7.5e-12,"trapping 6–9 ps","open PSI","#B45309",1,410],[2.6e-11,"A₀⁻ → A₁  26 ps","","#0E7490",-1,170],
+[2.5e-8,"A₁⁻ → F_X  25 ns","fast phase, spinach","#7C3AED",1,480],[2e-7,"150–200 ns","slow phase · cyanobacteria","#7C3AED",-1,230],[5e-7,"F_X → F_A → F_B","then ferredoxin","#B45309",1,565]];
+function D(t){const s=t%14,lt=-13+Math.min(s/10,1)*7;
+Ln(60,Y0,840,Y0,"#94A3B8",3);
+["100 fs","1 ps","10 ps","100 ps","1 ns","10 ns","100 ns","1 µs"].forEach((l,i)=>{const x0=60+i*111.4;Ln(x0,Y0-8,x0,Y0+8,"#94A3B8",2);T(l,x0,Y0+36,20,"#6B7280","center")});
+E.forEach(([s0,a,b,k,d,yl])=>{const on=Math.log10(s0)<=lt,px=X(s0),al=px>600?"right":"left",tx=px>600?px-10:px+10;x.globalAlpha=on?1:.18;
+Ln(px,Y0,px,yl+(d<0?12:-30),k,2);C(px,Y0,9,k);T(a,tx,yl,24,k,al,600);if(b)T(b,tx,yl+28,20,"#6B7280",al);x.globalAlpha=1});
+if(lt<-6.01)C(X(10**lt),Y0,13,"rgba(242,165,65,.8)");
+T("measured lifetimes, log scale",20,40,26,"#1A2233","left",600);
+T("Cherepanov 2017 · Müller 2003 · Sétif & Brettel 1993 · Vassiliev 2001",20,640,20,"#6B7280")}'''), "\n".join([
+    card(250, "Faster than thought", "Open PSI traps in 6–9 ps, about 3× faster than assumed. Removing P_B’s Mg ligand slows only the second step, ≈2×.", "#B45309", 1),
+    card(474, "A strongly coupled start", "Far‑red pulses make P700⁺A₀⁻ in under 180 fs, and A₁⁻ follows in 26 ps. P700 and A₀ act as one adiabatic system.", "#0E7490", 2),
+    card(698, "Energetics still debated", "Electrostatics put P700→A₀ and A₁A→F_X downhill. Published A₁ potentials span ≈350 mV.", "#7C3AED", 3),
+]), "Müller et al., Biophys. J. 85, 3899 (2003) · Holzwarth et al., Biophys. J. 90, 552 (2006) · Cherepanov et al., BBA 1858, 895 (2017) · Sétif &amp; Brettel, Biochemistry 32, 7846 (1993) · Vassiliev et al., BBA 1507, 139 (2001) · Ptushenko et al., Photosynth. Res. 97, 55 (2008) · Santabarbara et al., BBA 1708, 283 (2005)")
+
+# ---------------------------------------------------------------- protect (closed traps in the literature)
+S["protect"] = slide("protect", "When the trap is closed", "poise", "5 nm", "Closed traps: quenching, safety valves, damage", embed(128, 250, 880, 660, '''
+const B=[["295 K",12],["5 K",-50]];const Yz=300;
+function D(t){const s=t%12;
+T("Change in PSI fluorescence yield when P700 is oxidised",20,40,26,"#1A2233","left",600);
+Ln(80,Yz,520,Yz,"#94A3B8",2);T("0",68,Yz+8,22,"#6B7280","right");
+B.forEach(([l,v],i)=>{const g=sm((s-i*1.2)/1.8),h=v*4*g,X=130+i*200;x.fillStyle=v>0?"#2F7D4F":"#B91C1C";x.fillRect(X,Yz-Math.max(h,0),120,Math.abs(h));
+T((v>0?"+":"")+Math.round(v*g)+" %",X+60,v>0?Yz-h-12:Yz-h+34,28,"#1A2233","center",600);T(l,X+60,v>0?Yz+36:Yz-14,24,"#4A5568","center",600)});
+const a=sm(s-3.5);x.globalAlpha=a;
+T("main decay at 295 K",700,120,24,"#1A2233","center",600);
+[["open",34,"#0E7490"],["closed",37,"#B91C1C"]].forEach(([l,v,k],i)=>{const w=v*4;x.fillStyle=k;x.fillRect(580,150+i*60,w,40);T(l+"  "+v+" ps",590+w,180+i*60,22,"#1A2233")});
+T("cooling 295 → 5 K: yield ×20 (open), ×10 (closed)",440,605,24,"#B45309","center",600);x.globalAlpha=1;
+T("Data: Byrdin et al. 2000, Synechococcus PSI trimers",20,648,22,"#6B7280")}'''), "\n".join([
+    card(250, "P700⁺ quenches in the cold", "Closing PSI raises emission 12% at room temperature but cuts it about 50% at 5 K. Below ~160 K, P700⁺ is a quencher.", "#B91C1C", 1),
+    card(474, "Reduced acceptors are measurable", "PSI’s bound Fe–S acceptors were first redox‑titrated in 1974. EPR now resolves F_X, F_A and F_B.", "#0E7490", 2),
+    card(698, "Protection costs efficiency", "Back‑reactions trade yield for safety around O₂. PSI damage is rare in vivo but recovers very slowly.", "#B45309", 3),
+]), "Byrdin et al., Biophys. J. 79, 992 (2000) · Evans, Reeves &amp; Cammack, FEBS Lett. 49, 111 (1974) · Vassiliev et al., BBA 1507, 139 (2001) · Rutherford et al., FEBS Lett. 586, 603 (2012) · Sonoike, Physiol. Plant. 142, 56 (2011)")
+
+# ---------------------------------------------------------------- beyond (far-red photosynthesis and PSI devices)
+S["beyond"] = slide("beyond", "Design lessons from the literature", "design", "15 nm", "Past the red limit, and wired to catalysts", embed(128, 250, 880, 660, '''
+const X=l=>60+(l-650)/170*780,Yb=330;
+const Bd=[[670,690,"bulk Chl a","#2F7D4F",0],[708,740,"red Chl a","#B91C1C",1],[700,750,"Chl d","#7C3AED",2]];
+function D(t){const s=t%14,lc=650+170*sm(s/8);
+T("Wavelengths that drive PSI",20,40,26,"#1A2233","left",600);
+Ln(60,Yb,840,Yb,"#94A3B8",2);for(let l=650;l<=800;l+=25){Ln(X(l),Yb-6,X(l),Yb+6,"#94A3B8",2);T(l+"",X(l),Yb+32,20,"#6B7280","center")}T("nm",X(820),Yb+32,20,"#6B7280","center");
+Bd.forEach(([a,b,n,k,r])=>{const on=lc>=a;x.globalAlpha=on?.85:.15;x.fillStyle=k;x.fillRect(X(a),Yb-50-r*44,X(b)-X(a),30);x.globalAlpha=1;T(n,(X(a)+X(b))/2,Yb-29-r*44,18,on?"#FFFFFF":"rgba(255,255,255,.4)","center",600);x.globalAlpha=1});
+[[700,"P700","","#B45309"],[745,"Chl f","745 nm","#0E7490"],[800,"far-red PSI","≈ 800 nm","#0E7490"]].forEach(([l,a,b,k])=>{const on=lc>=l;x.globalAlpha=on?1:.15;Ln(X(l),Yb-250,X(l),Yb,k,3);const al=l>780?"right":"left",tx=l>780?X(l)-8:X(l)+8;T(a,tx,Yb-232,20,k,al,600);if(b)T(b,tx,Yb-208,20,k,al);x.globalAlpha=1});
+Ln(X(lc),Yb-260,X(lc),Yb+10,"rgba(242,165,65,.9)",4);
+const g=sm((s-8.5)/2);T("electrons per PSI per second",20,420,26,"#1A2233","left",600);
+[["cyanobacteria in vivo",47,"#2F7D4F"],["PSI–[FeFe]-hydrogenase",105,"#B45309"]].forEach(([n,v,k],i)=>{const w=v*5.6*g,Y=440+i*100;x.fillStyle=k;x.fillRect(60,Y,w,44);T(n,60,Y+72,22,"#4A5568");if(g>.02)T(Math.round(v*g)+"",70+w,Y+32,28,"#1A2233","left",600)});
+T("Nürnberg 2018 · Gisriel 2020 · Chen & Blankenship 2011 · Lubner 2011",20,650,20,"#6B7280")}'''), "\n".join([
+    card(250, "Beyond 700 nm", "Chl f drives PSI charge separation at 745 nm. Far‑red PSI uses light to ≈800 nm with four Chl f sites.", "#0E7490", 1),
+    card(474, "Wire the acceptor", "Tethering F_B to a hydrogenase gives 105 e⁻ per PSI per second, twice the in‑vivo rate, by removing diffusion.", "#B45309", 2),
+    card(698, "Design principles", "Tune site energies, regulate flow and protect. Plant PSI–LHCI (600 kDa, 2.8 Å) shows all three in one complex.", "#2F7D4F", 3),
+]), "Nürnberg et al., Science 360, 1210 (2018) · Gisriel et al., Sci. Adv. 6, eaay6415 (2020) · Chen &amp; Blankenship, Trends Plant Sci. 16, 427 (2011) · Grimme et al., JACS 130, 6308 (2008) · Lubner et al., PNAS 108, 20988 (2011) · Qin et al., Science 348, 989 (2015) · Scholes et al. 2011 · Croce &amp; van Amerongen 2014, 2020 · Chitnis 2001 · Ort et al. 2015")
+
+
+def refs(sid, n, title, items, total=4, fs=24):
     half = (len(items) + 1) // 2
     col = lambda xs, left: (f'<div style="position:absolute;left:{left}px;top:250px;width:800px;display:flex;flex-direction:column;gap:10px">'
-                            + "".join(f'\n<p style="font-size:24px;line-height:1.3;color:#2D3748">{r}</p>' for r in xs) + "\n</div>")
+                            + "".join(f'\n<p style="font-size:{fs}px;line-height:1.3;color:#2D3748">{r}</p>' for r in xs) + "\n</div>")
     return f"""<section id="{sid}" data-transition="fade" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
-<p style="position:absolute;left:128px;top:92px;width:1664px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#7C3AED;font-weight:600">References {n}/2</p>
+<p style="position:absolute;left:128px;top:92px;width:1664px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#7C3AED;font-weight:600">References {n}/{total}</p>
 <h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:{HEAD};font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">{title}</h2>
 {col(items[:half], 128)}
 {col(items[half:], 992)}
@@ -284,6 +355,37 @@ R2 = ["Gobets B, van Grondelle R. Energy transfer and trapping in photosystem I.
       "Zhou P et al. Solar‑to‑hydrogen efficiency of more than 9% in photocatalytic water splitting. Nature 613, 66 (2023)."]
 S["refsA"] = refs("refsA", 1, "Light, excited states and photosynthesis", R1)
 S["refsB"] = refs("refsB", 2, "Photosystem I, red chlorophylls, redox and solar fuels", R2)
+R3 = ["Byrdin M et al. Light harvesting in photosystem I: modeling based on the 2.5‑Å structure of photosystem I from Synechococcus elongatus. Biophys. J. 83, 433 (2002).",
+      "Sener MK, Lu D, Ritz T, Park S, Fromme P, Schulten K. Robustness and optimality of light harvesting in cyanobacterial photosystem I. J. Phys. Chem. B 106, 7948 (2002).",
+      "Gobets B et al. Time‑resolved fluorescence emission measurements of photosystem I particles of various cyanobacteria: a unified compartmental model. Biophys. J. 81, 407 (2001).",
+      "Pålsson LO et al. Energy transfer and charge separation in photosystem I: P700 oxidation upon selective excitation of the long‑wavelength antenna chlorophylls. Biophys. J. 74, 2611 (1998).",
+      "Jennings RC et al. The photochemical trapping rate from red spectral states in PSI–LHCI is determined by thermal activation and energy dispersion. BBA Bioenerg. 1557, 91 (2003).",
+      "Wientjes E, van Stokkum IHM, van Amerongen H, Croce R. The role of the individual Lhcas in photosystem I excitation energy trapping. Biophys. J. 101, 745 (2011).",
+      "Byrdin M et al. Decay kinetics and quantum yields of fluorescence in photosystem I from Synechococcus elongatus with P700 in the reduced and oxidized state. Biophys. J. 79, 992 (2000).",
+      "Müller MG, Niklas J, Lubitz W, Holzwarth AR. Ultrafast transient absorption studies on photosystem I reaction centers from Chlamydomonas reinhardtii. 1. Biophys. J. 85, 3899 (2003).",
+      "Holzwarth AR, Müller MG, Niklas J, Lubitz W. Ultrafast transient absorption studies on photosystem I reaction centers from Chlamydomonas reinhardtii. 2. Biophys. J. 90, 552 (2006).",
+      "Cherepanov DA et al. Mechanism of adiabatic primary electron transfer in photosystem I: femtosecond spectroscopy upon excitation of reaction center in the far‑red edge of the Qy band. BBA Bioenerg. 1858, 895 (2017).",
+      "Sétif P, Brettel K. Forward electron transfer from phylloquinone A1 to iron‑sulfur centers in spinach photosystem I. Biochemistry 32, 7846 (1993).",
+      "Vassiliev IR, Antonkine ML, Golbeck JH. Iron–sulfur clusters in type I reaction centers. BBA Bioenerg. 1507, 139 (2001).",
+      "Ptushenko VV, Cherepanov DA, Krishtalik LI, Semenov AY. Semi‑continuum electrostatic calculations of redox potentials in photosystem I. Photosynth. Res. 97, 55 (2008).",
+      "Santabarbara S, Heathcote P, Evans MCW. Modelling of the electron transfer reactions in photosystem I by electron tunnelling theory. BBA Bioenerg. 1708, 283 (2005).",
+      "Moser CC, Keske JM, Warncke K, Farid RS, Dutton PL. Nature of biological electron transfer. Nature 355, 796 (1992)."]
+R4 = ["Evans MCW, Reeves SG, Cammack R. Determination of the oxidation–reduction potential of the bound iron–sulphur proteins of the primary electron acceptor complex of photosystem I in spinach chloroplasts. FEBS Lett. 49, 111 (1974).",
+      "Rutherford AW, Osyczka A, Rappaport F. Back‑reactions, short‑circuits, leaks and other energy wasteful reactions in biological electron transfer. FEBS Lett. 586, 603 (2012).",
+      "Sonoike K. Photoinhibition of photosystem I. Physiol. Plant. 142, 56 (2011).",
+      "Chitnis PR. Photosystem I: function and physiology. Annu. Rev. Plant Physiol. Plant Mol. Biol. 52, 593 (2001).",
+      "Nürnberg DJ et al. Photochemistry beyond the red limit in chlorophyll f–containing photosystems. Science 360, 1210 (2018).",
+      "Gisriel C et al. The structure of photosystem I acclimated to far‑red light illuminates an ecologically important acclimation process in photosynthesis. Sci. Adv. 6, eaay6415 (2020).",
+      "Chen M, Blankenship RE. Expanding the solar spectrum used by photosynthesis. Trends Plant Sci. 16, 427 (2011).",
+      "Grimme RA, Lubner CE, Bryant DA, Golbeck JH. Photosystem I/molecular wire/metal nanoparticle bioconjugates for the photocatalytic production of H₂. J. Am. Chem. Soc. 130, 6308 (2008).",
+      "Lubner CE et al. Solar hydrogen‑producing bionanodevice outperforms natural photosynthesis. PNAS 108, 20988 (2011).",
+      "Qin X, Suga M, Kuang T, Shen JR. Structural basis for energy transfer pathways in the plant PSI‑LHCI supercomplex. Science 348, 989 (2015).",
+      "Scholes GD, Fleming GR, Olaya‑Castro A, van Grondelle R. Lessons from nature about solar light harvesting. Nat. Chem. 3, 763 (2011).",
+      "Croce R, van Amerongen H. Natural strategies for photosynthetic light harvesting. Nat. Chem. Biol. 10, 492 (2014).",
+      "Croce R, van Amerongen H. Light harvesting in oxygenic photosynthesis: structural biology meets spectroscopy. Science 369, eaay2058 (2020).",
+      "Ort DR et al. Redesigning photosynthesis to sustainably meet global food and bioenergy demand. PNAS 112, 8529 (2015)."]
+S["refsC"] = refs("refsC", 3, "Literature: red pools and electron transfer", R3, fs=21)
+S["refsD"] = refs("refsD", 4, "Literature: redox, protection and devices", R4, fs=21)
 
 for sid, html in S.items():
     (ROOT / "slides" / f"{sid}.html").write_text(html)

@@ -1,0 +1,42 @@
+<section id="beyond" data-transition="fade" style="background:#FFFFFF;color:#1A2233;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column">
+<p style="position:absolute;left:128px;top:92px;width:800px;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#B45309;font-weight:600">Design lessons from the literature</p>
+<p style="position:absolute;left:960px;top:92px;width:832px;font-size:24px;text-align:right;color:#6B7280"><span style="color:#2F7D4F;font-weight:600">zoom 15 nm</span> · absorb → funnel → climb → trap → poise → <span style="color:#B45309"><b>design</b></span></p>
+<h2 style="position:absolute;left:128px;top:132px;width:1664px;font-family:'Space Grotesk', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#1A2233">Past the red limit, and wired to catalysts</h2>
+<x-embed style="position:absolute;left:128px;top:250px;width:880px;height:660px"><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style><canvas id="c"></canvas><script>
+const DW=880,DH=660;
+const c=document.getElementById("c"),x=c.getContext("2d"),SF="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+function R(){const d=devicePixelRatio||1,W=innerWidth||DW,H=innerHeight||DH;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";const s=Math.min(W/DW,H/DH);x.setTransform(d*s,0,0,d*s,(W-DW*s)*d/2,(H-DH*s)*d/2)}
+function T(s,X,Y,z,k,a,w){x.font=(w||400)+" "+z+"px "+SF;x.fillStyle=k;x.textAlign=a||"left";x.fillText(s,X,Y)}
+function C(X,Y,r,k){x.beginPath();x.arc(X,Y,Math.max(r,0),0,6.2832);x.fillStyle=k;x.fill()}
+function Ln(a,b,e,f,k,w){x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.strokeStyle=k;x.lineWidth=w||2;x.stroke()}
+function L(m){x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();x.save();D(m/1000);x.restore();requestAnimationFrame(L)}
+const sm=k=>{k=Math.min(Math.max(k,0),1);return k*k*(3-2*k)};
+const X=l=>60+(l-650)/170*780,Yb=330;
+const Bd=[[670,690,"bulk Chl a","#2F7D4F",0],[708,740,"red Chl a","#B91C1C",1],[700,750,"Chl d","#7C3AED",2]];
+function D(t){const s=t%14,lc=650+170*sm(s/8);
+T("Wavelengths that drive PSI",20,40,26,"#1A2233","left",600);
+Ln(60,Yb,840,Yb,"#94A3B8",2);for(let l=650;l<=800;l+=25){Ln(X(l),Yb-6,X(l),Yb+6,"#94A3B8",2);T(l+"",X(l),Yb+32,20,"#6B7280","center")}T("nm",X(820),Yb+32,20,"#6B7280","center");
+Bd.forEach(([a,b,n,k,r])=>{const on=lc>=a;x.globalAlpha=on?.85:.15;x.fillStyle=k;x.fillRect(X(a),Yb-50-r*44,X(b)-X(a),30);x.globalAlpha=1;T(n,(X(a)+X(b))/2,Yb-29-r*44,18,on?"#FFFFFF":"rgba(255,255,255,.4)","center",600);x.globalAlpha=1});
+[[700,"P700","","#B45309"],[745,"Chl f","745 nm","#0E7490"],[800,"far-red PSI","≈ 800 nm","#0E7490"]].forEach(([l,a,b,k])=>{const on=lc>=l;x.globalAlpha=on?1:.15;Ln(X(l),Yb-250,X(l),Yb,k,3);const al=l>780?"right":"left",tx=l>780?X(l)-8:X(l)+8;T(a,tx,Yb-232,20,k,al,600);if(b)T(b,tx,Yb-208,20,k,al);x.globalAlpha=1});
+Ln(X(lc),Yb-260,X(lc),Yb+10,"rgba(242,165,65,.9)",4);
+const g=sm((s-8.5)/2);T("electrons per PSI per second",20,420,26,"#1A2233","left",600);
+[["cyanobacteria in vivo",47,"#2F7D4F"],["PSI–[FeFe]-hydrogenase",105,"#B45309"]].forEach(([n,v,k],i)=>{const w=v*5.6*g,Y=440+i*100;x.fillStyle=k;x.fillRect(60,Y,w,44);T(n,60,Y+72,22,"#4A5568");if(g>.02)T(Math.round(v*g)+"",70+w,Y+32,28,"#1A2233","left",600)});
+T("Nürnberg 2018 · Gisriel 2020 · Chen & Blankenship 2011 · Lubner 2011",20,650,20,"#6B7280")}
+onresize=R;R();requestAnimationFrame(L);
+</script></x-embed>
+<div data-build-in="rise 1" style="position:absolute;left:1040px;top:250px;width:696px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#0E7490">Beyond 700 nm</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Chl f drives PSI charge separation at 745 nm. Far‑red PSI uses light to ≈800 nm with four Chl f sites.</p>
+</div>
+<div data-build-in="rise 2" style="position:absolute;left:1040px;top:474px;width:696px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#B45309">Wire the acceptor</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Tethering F_B to a hydrogenase gives 105 e⁻ per PSI per second, twice the in‑vivo rate, by removing diffusion.</p>
+</div>
+<div data-build-in="rise 3" style="position:absolute;left:1040px;top:698px;width:696px;background:#F4F6FA;border:1px solid #DDE3EC;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:32px;font-weight:600;color:#2F7D4F">Design principles</h3>
+<p style="font-size:26px;line-height:1.4;color:#2D3748">Tune site energies, regulate flow and protect. Plant PSI–LHCI (600 kDa, 2.8 Å) shows all three in one complex.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1480px;font-size:24px;color:#6B7280">Nürnberg et al., Science 360, 1210 (2018) · Gisriel et al., Sci. Adv. 6, eaay6415 (2020) · Chen &amp; Blankenship, Trends Plant Sci. 16, 427 (2011) · Grimme et al., JACS 130, 6308 (2008) · Lubner et al., PNAS 108, 20988 (2011) · Qin et al., Science 348, 989 (2015) · Scholes et al. 2011 · Croce &amp; van Amerongen 2014, 2020 · Chitnis 2001 · Ort et al. 2015</p>
+<p style="position:absolute;left:1672px;bottom:64px;width:120px;font-size:24px;color:#6B7280;text-align:right">25</p>
+<aside>[25:04–25:43] The literature also shows how far the design can go. Chlorophyll f drives PSI charge separation at 745 nm, and far-red PSI uses light to about 800 nm with only four chlorophyll f sites. On the acceptor side, tethering FB directly to a hydrogenase gives 105 electrons per PSI per second, twice the in-vivo rate, because nothing has to diffuse. That's today's lesson as a device: keep the trap open by clearing electrons fast. The reviews cited here map out the rest of the design space.</aside>
+</section>

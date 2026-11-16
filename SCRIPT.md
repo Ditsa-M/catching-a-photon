@@ -1,8 +1,8 @@
 # Light, redox and energy flow in Photosystem I: speaker script (≈30 min slot)
 
-Story: one absorbed photon has three possible fates; the talk follows absorb → funnel → climb → trap → poise → design and asks how the reaction centre's redox state changes which fate wins. Times assume 130 words/min; the talk ends near **26:10**.
+Story: one absorbed photon has three possible fates; the talk follows absorb → funnel → climb → trap → poise → design and asks how the reaction centre's redox state changes which fate wins. Times assume 130 words/min; the talk ends near **28:09**.
 
-Total: 3403 words.
+Total: 3661 words.
 
 ## 1. Light, redox and energy flow in Photosystem I
 
@@ -10,7 +10,7 @@ An excited chlorophyll has about six nanoseconds before its energy is lost as he
 
 ## 2. From a leaf to one electron: nine levels of zoom
 
-First, where we are. A plant stores about one percent of the sunlight that reaches it. Zoom into a leaf, then palisade cells packed with chloroplasts, then the stacked thylakoid membranes. In the membrane sit Photosystem II, cytochrome b6f, Photosystem I and ATP synthase. Zoom into Photosystem I: about 96 chlorophylls per monomer form an antenna around one special pair, P700, and an electron leaves through iron–sulfur clusters. Zoom into one chlorophyll: a magnesium ion in a conjugated ring. At the bottom, one red photon, about 1.8 eV, moves one π electron from the HOMO to the LUMO in femtoseconds. That is where the story starts. The ladder on the right is the map: slides 4 to 6 stay at the electron, 7 to 21 work at the level of pigments and proteins, and slide 22 zooms back out.
+First, where we are. A plant stores about one percent of the sunlight that reaches it. Zoom into a leaf, then palisade cells packed with chloroplasts, then the stacked thylakoid membranes. In the membrane sit Photosystem II, cytochrome b6f, Photosystem I and ATP synthase. Zoom into Photosystem I: about 96 chlorophylls per monomer form an antenna around one special pair, P700, and an electron leaves through iron–sulfur clusters. Zoom into one chlorophyll: a magnesium ion in a conjugated ring. At the bottom, one red photon, about 1.8 eV, moves one π electron from the HOMO to the LUMO in femtoseconds. That is where the story starts. The ladder on the right is the map: slides 4 to 6 stay at the electron, 7 to 25 work at the level of pigments and proteins, and slide 26 zooms back out.
 
 ## 3. Three fates for one absorbed photon
 
@@ -52,50 +52,66 @@ Cyanobacterial PSI contains red chlorophylls: strongly coupled clusters absorbin
 
 That makes the red chlorophylls a built-in probe. At room temperature emission is weak and broad. Freeze to 77 K and a strong band appears at 760 nm in the Spirulina trimer, F760, from energy stuck on the red pigments. Its yield is k_F over the sum of k_F, k_nr and k_Q, where k_Q is quenching by the reaction centre. The key published observation is that P700+, the oxidised special pair, quenches F760. So the size of the red band depends on the redox state of the reaction centre. The spectra here are a schematic model, but the logic is the one used in the literature: low-temperature emission reads out what the trap is doing. Two practical points about this measurement. First, at 77 K the sample is a glass, so the redox state you prepared at room temperature is locked in when it freezes. Second, the yield equation tells you what to compare: if k_F and k_nr stay the same, any change in F760 means a change in k_Q, which means a change at the reaction centre. Normalising to a band that does not respond, such as the bulk emission, removes differences in sample concentration.
 
-## 13. Trapping resolved by transient absorption
+## 13. Red pools slow trapping; cold exposes them
+
+Here are the measurements behind that picture. Across five cyanobacterial PSI cores, trapping takes 23 to 50 ps, and red-chlorophyll content alone explains the spread. At room temperature even 750 nm light oxidises P700 as well as bulk light; at 5 K only about half the excitations get there. The chart is plant PSI–LHCI: red emission is trapped four times more slowly at 170 K, with activation energies of 60 to 120 meV, the size of the gap on the previous diagram. Structure-based models of all 96 chlorophylls reproduce these numbers.
+
+## 14. Trapping resolved by transient absorption
 
 How do we know how fast the trap works? Pump–probe spectroscopy: a femtosecond pump starts the clock and a delayed probe measures the change in absorption. This is a schematic model with PSI's shape. Near 680 nm the antenna bleach recovers as excitations leave; near 820 nm a band grows in from P700+, the first sign that energy has become charge. Both share one lifetime of a few tens of picoseconds. Global analysis separates transfer from trapping. So energy is trapped in about 30 ps. What happens inside the reaction centre? This kind of experiment is how the 20 to 50 ps trapping time was measured, and it is also how the red pigments were seen to slow trapping in cyanobacterial PSI, with an extra slow component when energy has to climb out of the red sites.
 
-## 14. Reaction centres: a two‑branch cofactor wire
+## 15. Reaction centres: a two‑branch cofactor wire
 
 Reaction centres are cofactor wires built in two branches with pseudo-two-fold symmetry. At the top is the special pair, an excitonically coupled dimer that acts as the trap and spreads the hole over two chlorophylls. In type II centres, as in purple bacteria and PSII, the electron uses one branch and ends on quinones. Photosystem I is type I: both branches are active, and the electron ends on iron–sulfur clusters, FX, then FA and FB. Those iron–sulfur clusters are exactly the cofactors a reductant like dithionite can fill. So why do electrons move so fast through protein? For today, keep in mind the order of cofactors: P700, A0, A1, FX, then FA and FB. Each one can be empty or full, and an electron can only move forward into an empty one.
 
-## 15. Tunneling through protein: Dutton’s ruler
+## 16. The first picoseconds, measured
+
+Ultrafast spectroscopy has rewritten the first steps. Open PSI traps in 6 to 9 ps, three times faster than assumed, and mutating P700's ligands slows only the second step, so whether the first electron leaves P700 itself is still debated. Pumping the far-red edge gives P700+A0− in under 180 fs, then A1− in 26 ps, and A1 hands over to FX in tens to hundreds of nanoseconds. Published A1 potentials span about 350 mV. The common thread is distance: 20 Å more spacing costs 10^12 in rate. So how do electrons cross protein?
+
+## 17. Tunneling through protein: Dutton’s ruler
 
 They tunnel. The Fermi golden rule gives a rate proportional to the electronic coupling squared times a Franck–Condon factor, and the coupling decays exponentially with distance, β about 1.4 per ångström in protein. Dutton turned that into a ruler: every 1.7 ångströms costs a factor of ten. At 5 Å, picoseconds; at 14 Å, microseconds; at 25 Å, about a second. Natural redox chains keep cofactors within about 14 Å. The second term in the ruler is the driving force, which is Marcus. A quick calculation: going from 10 Å to 15 Å costs 5 times 0.6, three orders of magnitude, so from nanoseconds to microseconds. That's why the spacing of cofactors in PSI matters so much.
 
-## 16. Charge separation and Marcus theory
+## 18. Charge separation and Marcus theory
 
 This is transition-state theory again. Marcus gives the activation energy for electron transfer as (ΔG° + λ) squared over 4λ, where λ is the reorganisation energy from the Franck–Condon slide. As the driving force grows, the rate rises to a maximum at −ΔG° = λ, then falls again: the inverted region. Nature's design rule is forward steps near the top of the parabola and wasteful recombination pushed into the inverted region. That design only works if each acceptor is empty when the electron arrives. Let's put numbers on PSI. For PSI the reorganisation energies are a few tenths of an eV, and most forward steps have driving forces of similar size, which puts them near the activationless top of the curve.
 
-## 17. Photosystem I’s electron staircase
+## 19. Photosystem I’s electron staircase
 
 This is the PSI energy–kinetic diagram from lecture 16, with potentials from Brettel's review. The photon lifts P700 from about +0.45 V to an excited state near −1.3 V. The electron then walks down a staircase: A0 in a few picoseconds, A1 in about 30, FX in 20 to 200 ns, FA and FB in under a microsecond, then ferredoxin. Short hops with driving force near λ are fast, and each step outruns recombination. Notice the potentials: FA and FB sit near −0.5 V. A strong enough reductant fills them, and then the staircase has nowhere to go. Ferredoxin then takes the electron away from FA and FB. In the cell that happens in microseconds; in a test tube with no acceptor and a reductant present, it never happens.
 
-## 18. Solution potential sets which cofactors are reduced
+## 20. Solution potential sets which cofactors are reduced
 
 This is what I mean by redox poising. Every cofactor obeys the Nernst equation: its fraction reduced depends on the solution potential compared with its midpoint. The animation sweeps the solution potential from oxidising to reducing. At the top, ferricyanide, about +0.36 V, can start to oxidise P700, and P700+ is a quencher. Going down, dithionite, about −0.66 V at pH 7, reduces FA and FB, and partly FX. Now an electron that reaches A1 can't move on, so the charge pair recombines. Either way the reaction centre is closed, and the photon's energy must go somewhere else. Note that the dithionite potential depends on pH and concentration, so the potential has to be measured, not assumed. A worked Nernst example: for a one-electron cofactor at room temperature, each 59 mV of potential changes the ratio of reduced to oxidised by a factor of ten. So a solution potential 120 mV below a cofactor's midpoint leaves it about 99 percent reduced, and 120 mV above leaves it about 99 percent oxidised. F_A at −0.52 V is mostly reduced near −0.64 V; F_X at −0.70 V is still mostly oxidised there. That's why the exact potential matters.
 
-## 19. Testing redox control: titrate, freeze, measure, reverse
+## 21. Testing redox control: titrate, freeze, measure, reverse
 
-How would you test this? Here's the experimental approach, shown as a schematic, not data. Add a reductant such as dithionite in steps, measure the potential in the sample, freeze each sample to 77 K and record its emission, focusing on the red band. Then add an oxidant such as ferricyanide. The reversal is the critical control: if the spectrum returns, the change came from redox state; if it doesn't, the protein was damaged. Good practice is to measure the potential in the sample itself, use redox mediators so the cofactors equilibrate with the solution, and dark-adapt before freezing so light doesn't set the redox state for you. Each sample gives one point: a measured potential and a red-band intensity. Plotted together, those points form a titration curve. If a curve like that fits a Nernst equation, its midpoint tells you which cofactor is in control. Without mediators and an in-sample potential measurement, you can still see a trend, but you can't assign a midpoint.
+How would you test this? Here's the experimental approach, shown as a schematic, not data. Add a reductant such as dithionite in steps, measure the potential in the sample, freeze each sample to 77 K and record its emission, focusing on the red band. Then add an oxidant such as ferricyanide. The reversal is the critical control: if the spectrum returns, the change came from redox state; if it doesn't, the protein was damaged. Good practice is to measure the potential in the sample itself, use redox mediators so the cofactors equilibrate with the solution, and dark-adapt before freezing so light doesn't set the redox state for you.
 
-## 20. Closing the trap redistributes the photon
+## 22. Closing the trap redistributes the photon
 
 What should we expect? Put the red chlorophyll into the rate-competition picture. Its fluorescence yield is k_F over k_F plus k_nr plus k_Q. With illustrative numbers, a radiative lifetime of 15 ns and a non-radiative one of 5 ns, the curve shows the yield against quenching by the reaction centre. When the trap removes energy quickly, the red emission is dim and short-lived. When the trap is closed, k_Q falls, and the yield and lifetime both rise. This is the Stern–Volmer form: Φ0 over Φ equals 1 plus k_Q τ0. The prediction is testable two ways: brightness and fluorescence lifetime, which don't depend on sample concentration. Put numbers in. With no quenching, Φ is 0.067 over 0.267, about 0.25, and the lifetime is about 3.8 ns. With k_Q at one per nanosecond, Φ drops to about 0.05 and the lifetime to under a nanosecond. That's a fivefold change in brightness from a change in one rate. In real PSI the trap rate is much faster than this, so even small changes in how well the trap works should show up clearly.
 
-## 21. Next: tuning a single red-chlorophyll site
+## 23. Closed traps: quenching, safety valves, damage
 
-The next step is to tune a single red-chlorophyll site instead of the whole protein. The idea is to place a cysteine a few ångströms from one red chlorophyll, with serine as a near-identical control: oxygen versus sulfur. A cysteine thiol can be reduced or oxidised, for example to a disulfide, and each form carries different charge and polarity, which could shift the pigment's site energy. The test uses the same titrate, freeze and reverse protocol: does the red band shift or change size only when the thiol can change redox state? This is a hypothesis and a design; I'm not showing data. Why a single site? Changing the whole redox potential of the solution affects every cofactor at once, so it is hard to say which one caused a change. A single engineered site asks a sharper question: does the chemistry of one residue near one pigment change that pigment's energy, and through it, where the photon goes?
+What does a closed trap do in practice? At room temperature, oxidising P700 barely matters: the main decay goes from 34 to 37 ps. Below about 160 K it reverses and P700+ quenches, halving emission at 5 K. That is why low-temperature red emission reports on P700. The bound iron–sulfur acceptors were titrated back in 1974; they are what dithionite fills. Back-reactions act as a safety valve against oxygen chemistry, and damaged PSI recovers very slowly. A closed trap is both a probe and a risk.
 
-## 22. Design principles and the efficiency gap
+## 24. Next: tuning a single red-chlorophyll site
+
+The next step is to tune a single red-chlorophyll site instead of the whole protein. The idea is to place a cysteine a few ångströms from one red chlorophyll, with serine as a near-identical control: oxygen versus sulfur. A cysteine thiol can be reduced or oxidised, for example to a disulfide, and each form carries different charge and polarity, which could shift the pigment's site energy. The test uses the same titrate, freeze and reverse protocol: does the red band shift or change size only when the thiol can change redox state? This is a hypothesis and a design; I'm not showing data.
+
+## 25. Past the red limit, and wired to catalysts
+
+The literature also shows how far the design can go. Chlorophyll f drives PSI charge separation at 745 nm, and far-red PSI uses light to about 800 nm with only four chlorophyll f sites. On the acceptor side, tethering FB directly to a hydrogenase gives 105 electrons per PSI per second, twice the in-vivo rate, because nothing has to diffuse. That's today's lesson as a device: keep the trap open by clearing electrons fast. The reviews cited here map out the rest of the design space.
+
+## 26. Design principles and the efficiency gap
 
 Now zoom back out, to devices that try to copy the leaf. Absorb, transfer, separate, catalyse: an artificial photocatalyst needs the same four steps. Today's lesson adds a condition: the trap has to stay open. In PSI, a reduced acceptor or an oxidised donor redistributes the photon into heat and light. In an artificial system, carriers that are not cleared away by a cocatalyst recombine the same way. The bars are the reality check: crops about 1 percent, the best scaled panels under 1 percent solar-to-hydrogen, a 9 percent lab record, and a theoretical limit near 33. Clearing electrons fast is a big part of that gap. Biology also teaches the fix: PSI hands electrons to ferredoxin in microseconds, and an artificial system needs a cocatalyst or acceptor that does the same job.
 
-## 23. Conclusions: the trap’s redox state steers the photon
+## 27. Conclusions: the trap’s redox state steers the photon
 
 Four takeaways. One: rates compete. Each fate's yield is its share of the total rate. Two: red pigments need heat to send energy uphill, following e to the minus ΔE over kT, so at 77 K they become reporters of where energy is stuck. Three: redox poises the trap. The Nernst equation sets which cofactors are reduced, and that opens or closes the reaction centre and redistributes the photon. Four: the design lesson for solar fuels is to keep the trap open by clearing electrons away fast. The animation runs through the six steps of the path we followed. If you remember one thing: the same photon, absorbed by the same pigments, can become charge, heat or light depending on whether the trap is open, and the trap's state is set by redox chemistry.
 
-## 24. thank‑you/
+## 28. thank‑you/
 
-Thank you, and I'm happy to take questions. In a 30-minute slot this leaves a few minutes for discussion. If you are running long, shorten the Franck–Condon and tunnelling slides to one sentence each.
+Thank you, and I'm happy to take questions. In a 30-minute slot this leaves a few minutes for discussion. If you are running long, shorten the Franck–Condon and tunnelling slides to one sentence each, or give the two literature slides on reaction-centre kinetics and closed traps one sentence each.
