@@ -3,7 +3,7 @@
 **How the protein's redox state decides where an absorbed photon's energy goes**
 Ditsa Mallick · CHM 598, Introduction to Photochemistry
 
-One absorbed photon can become charge, heat or light. This 26-slide, 30-minute talk follows it through *absorb → funnel → climb → trap → poise → design* and asks how opening or closing the reaction centre, by changing its redox state, changes which fate wins.
+One absorbed photon can become charge, heat or light. This 32-slide, 30-minute talk (28 talk slides, about 28 minutes, plus 4 reference slides) follows it through *absorb → funnel → climb → trap → poise → design* and asks how opening or closing the reaction centre, by changing its redox state, changes which fate wins.
 
 | # | Slide |
 |---|---|
@@ -19,20 +19,26 @@ One absorbed photon can become charge, heat or light. This 26-slide, 30-minute t
 | 10 | 96 chlorophylls, one reaction centre |
 | 11 | Some chlorophylls sit below the trap |
 | 12 | At 77 K, red emission reports where the energy is stuck |
-| 13 | Trapping resolved by transient absorption |
-| 14 | Reaction centres: a two‑branch cofactor wire |
-| 15 | Tunneling through protein: Dutton’s ruler |
-| 16 | Charge separation and Marcus theory |
-| 17 | Photosystem I’s electron staircase |
-| 18 | Solution potential sets which cofactors are reduced |
-| 19 | Testing redox control: titrate, freeze, measure, reverse |
-| 20 | Closing the trap redistributes the photon |
-| 21 | Next: tuning a single red-chlorophyll site |
-| 22 | Design principles and the efficiency gap |
-| 23 | Conclusions: the trap’s redox state steers the photon |
-| 24 | thank‑you/ |
-| 25 | Light, excited states and photosynthesis |
-| 26 | Photosystem I, red chlorophylls, redox and solar fuels |
+| 13 | Red pools slow trapping; cold exposes them |
+| 14 | Trapping resolved by transient absorption |
+| 15 | Reaction centres: a two‑branch cofactor wire |
+| 16 | The first picoseconds, measured |
+| 17 | Tunneling through protein: Dutton’s ruler |
+| 18 | Charge separation and Marcus theory |
+| 19 | Photosystem I’s electron staircase |
+| 20 | Solution potential sets which cofactors are reduced |
+| 21 | Testing redox control: titrate, freeze, measure, reverse |
+| 22 | Closing the trap redistributes the photon |
+| 23 | Closed traps: quenching, safety valves, damage |
+| 24 | Next: tuning a single red-chlorophyll site |
+| 25 | Past the red limit, and wired to catalysts |
+| 26 | Design principles and the efficiency gap |
+| 27 | Conclusions: the trap’s redox state steers the photon |
+| 28 | Thank you / questions |
+| 29 | Light, excited states and photosynthesis |
+| 30 | Photosystem I, red chlorophylls, redox and solar fuels |
+| 31 | Literature: red pools and electron transfer |
+| 32 | Literature: redox, protection and devices |
 
 The earlier version of this deck (PSI photophysics + machine learning for photocatalysts) is kept as git tag `v1-catching-a-photon`.
 
@@ -43,13 +49,19 @@ Open `index.html` in a browser. **← / →** or **Space** change slide, **N** s
 ## Building
 
 ```
-python3 scripts/redox_slides.py   # writes the new slides
+# optional: structure renders (UCSF ChimeraX + Pillow)
+for p in trimer etc chla; do PART=$p chimerax --nogui --offscreen --script scripts/render_5oy0_v2.py --exit; done
+python3 scripts/finish_renders.py # crop, label → assets/render/*_crop.png, psi_etc_labeled.png
+
+python3 scripts/redox_slides.py   # writes the generated slides
 python3 scripts/notes_redox.py    # order, breadcrumbs, page numbers, timed notes, SCRIPT.md
 python3 build.py                  # index.html
 ```
 
 ## Notes on the content
 
-- Only published work is cited; the references are on the last two slides.
-- The animations are schematic teaching models, not measured data, and each slide says so. The experimental-design (slide 19) and single-site (slide 21) slides show an approach and a hypothesis only, with no data.
+- Only published work is cited; the references are on the last four slides (29 primary papers added in Nov 2026 are on slides 31–32, checked against Crossref).
+- Slides 13, 16, 23 and 25 plot values reported in the cited papers; the other animations are schematic teaching models, and each slide says which.
+- Structures (slides 5, 10, 15) are rendered from PDB 5OY0 in UCSF ChimeraX.
+- The experimental-design (slide 21) and single-site (slide 24) slides show an approach and a hypothesis only, with no data.
 - The dithionite potential (≈ −0.66 V at pH 7) depends on pH and concentration (Mayhew 1978).
